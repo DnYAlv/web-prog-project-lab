@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('checkAdmin')->default(false);
-            $table->string('image');
+            $table->string('image')->default('defaultimg.jpg');
             $table->rememberToken();
             $table->timestamps();
         });
