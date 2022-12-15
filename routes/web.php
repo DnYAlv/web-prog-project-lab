@@ -15,64 +15,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return redirect('/login');
 });
 
-Route::get('/login', [UserController::class, 'login']);
-Route::post('/login', [UserController::class, 'loginUser']);
-Route::get('/register', [UserController::class, 'register']);
+Route::get('/login', function() {
+    return view('auth.login');
+});
+Route::post('/login', [UserController::class, 'login']);
+Route::get('/register', function(){
+    return view('auth.register');
+});
 
 Route::post('/logout', [UserController::class, 'logoutUser']);
-
-//latihan
-// Route::get('/mahasiswa/{nama}', function($nama){
-//     return "Tampilkan data mahasiswa bernama $nama";
-// });
-
-// Route::get('/hubungi-kami', function(){
-//     return '<h1>hubungi kami</h1>';
-// });
-
-// Route::redirect('/contact-us', '/hubungi-kami');
-
-// Route::prefix('/admin')->group(function (){
-
-//     Route::get('/mahasiswa', function (){
-//         echo "<h1>Daftar mahasiswa</h1>";
-//     });
-
-//     Route::get('/dosen', function (){
-//         echo "<h1>Daftar Dosen</h1>";
-//     });
-
-//     Route::get('/karyawan', function (){
-//         echo "<h1>Daftar Karyawan</h1>";
-//     });
-
-// });
-
-// Route::get('/buku/1', function (){
-//     return "Buku ke-1";
-// });
-
-// Route::get('/buku/1', function (){
-//     return "Buku saya ke-1";
-// });
-
-// Route::get('/buku/1', function (){
-//     return "Buku saya ke-1";
-// });
-
-// Route::get('/buku/{a}', function ($a) {
-//     return "Buku ke-$a";
-// });
-
-// Route::get('/buku/{b}', function ($b) {
-//     return "Buku ke-$b";
-// });
-
-// Route::get('/buku/{c}', function ($c) {
-//     return "Buku ke-$c";
-// });
-
-
