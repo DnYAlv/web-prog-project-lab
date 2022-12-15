@@ -15,11 +15,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('login');
+    return view('auth.login');
 });
 
 Route::get('/login', [UserController::class, 'login']);
 Route::post('/login', [UserController::class, 'loginUser']);
+Route::get('/register', [UserController::class, 'register']);
 
 Route::post('/logout', [UserController::class, 'logoutUser']);
 

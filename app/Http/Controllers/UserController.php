@@ -9,7 +9,10 @@ use Illuminate\Support\Facades\Cookie;
 class UserController extends Controller
 {
     public function login() {
-        return view('login');
+        return view('auth.login');
+    }
+    public function register() {
+        return view('auth.register');
     }
 
     public function loginUser(Request $request) {
