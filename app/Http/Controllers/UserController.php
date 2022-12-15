@@ -26,23 +26,24 @@ class UserController extends Controller
     }
 
     public function login(Request $request) {
+        $credentials = $request->validate([
+            'email' => 'required|string|email',
+            'password' => 'required|string'
+        ]);
 
-        $valid = Auth::attempt([
-            'email' => $request->email,
-            'password'=>$request->password],
-            $request->remember
-        );
+        $valid = Auth::attempt($credentials);
 
         if(!$valid) {
-            return redirect()->back()->withErrors('Wrong Combination of Email or Password');
-        }
-        if($request->remember) {
-            Cookie::queue("email", $request->email);
-            Cookie::queue("password", $request->password);
-        }
-        else {
-            Cookie::queue(Cookie::forget("email"));
-            Cookie::queue(Cookie::forget("password"));
+            return redirect()->back()->with('error', 'Wrong Combination of Email and Password');
+        }else{
+            if($request->remember) {
+                Cookie::queue("email", $request->email);
+                Cookie::queue("password", $request->password);
+            }
+            else {
+                Cookie::queue(Cookie::forget("email"));
+                Cookie::queue(Cookie::forget("password"));
+            }
         }
         return redirect("/");
     }
