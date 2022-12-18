@@ -2,7 +2,7 @@
 @section('title', 'Login')
 @section('konten')
 <div class="d-flex justify-content-center align-self-center">
-    <form class="m-5" action="/login" method="post">
+    <form class="m-5" enctype="multipart/form-data" action="/login" method="post">
         <h3 class="text-black">Hello, Welcome back to <span class="text-danger">Movie</span>List</h3>
         @csrf
         <div class="row g-3 align-items-center mb-3">
