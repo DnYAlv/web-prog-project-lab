@@ -26,4 +26,6 @@ Route::get('/register', function(){
     return view('auth.register');
 });
 
+Route::post('/register', [UserController::class, 'register']);
+
 Route::post('/logout', [UserController::class, 'logoutUser']);

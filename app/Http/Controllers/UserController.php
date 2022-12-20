@@ -6,22 +6,34 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use App\Models\User;
-use COM;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
     public function register(Request $request){
-        $request->validate([
+
+        $rules = [
             'name' => 'required|min:5|string|unique:users,name',
             'email' => 'required|string|email|unique:users,email',
-            'password' => 'required|alpha_num|min:6|confirmed'
+            'password' => 'required|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]*$/|min:6|confirmed'
+        ];
+
+        $messages = [
+            'password.regex' => "The password must contain both alphabetical and numerical characters"
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if($validator->fails()){
+            return back()->withErrors($validator);
+        }
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'image' => 'testingimage'
         ]);
-
-        $user = $request->except('password_confirmation');
-        $user['image'] = 'test.jpg';
-        $user['password'] = bcrypt($user['password']);
-
-        User::create($user);
         return redirect('/login');
     }
 
@@ -32,20 +44,21 @@ class UserController extends Controller
             'password' => 'required|string'
         ]);
 
-        if(Auth::attempt($credentials)){
-            if($request->remember){
-                Cookie::queue('email', $request->email, 120);
-                Cookie::queue('password', $request->passwoord, 120);
-            }else{
-                Cookie::queue(Cookie::forget('email'));
-                Cookie::queue(Cookie::forget('password'));
+        $valid = Auth::attempt($credentials, true);
+
+        if(!$valid) {
+            return redirect()->back()->with('error', 'Wrong Combination of Email and Password');
+        }else{
+            if($request->remember) {
+                Cookie::queue("email", $request->email);
+                Cookie::queue("password", $request->password);
             }
-
-            // $request->session()->regenerate();
-            return redirect('/movies');
+            else {
+                Cookie::queue(Cookie::forget("email"));
+                Cookie::queue(Cookie::forget("password"));
+            }
         }
-
-        return redirect('/login')->with('error', "Invalid email/password!");
+        return redirect("/");
     }
 
     public function logoutUser() {
