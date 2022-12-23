@@ -32,6 +32,11 @@ Route::post('/register', [UserController::class, 'register']);
 Route::post('/logout', [UserController::class, 'logoutUser']);
 
 // Movie
-Route::get('/movies', [MovieController::class, 'index']);
-Route::get('/movies/create', [MovieController::class, 'create']);
-Route::post('/movies/insert', [MovieController::class, 'store']);
+Route::group(['prefix' => 'movies'], function (){
+    Route::get('/', [MovieController::class, 'index']);
+    Route::get('/create', [MovieController::class, 'create']);
+    Route::post('/insert', [MovieController::class, 'store']);
+    Route::get('/edit/{id}', [MovieController::class, 'edit']);
+    Route::get('/editMovie/{id}', [MovieController::class, 'update']);
+    Route::post('/deleteMovie/{id}', [MovieController::class, 'delete']);
+});
