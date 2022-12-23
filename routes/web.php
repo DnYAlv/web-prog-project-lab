@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActorController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -39,4 +40,11 @@ Route::group(['prefix' => 'movies'], function (){
     Route::get('/edit/{id}', [MovieController::class, 'edit']);
     Route::get('/editMovie/{id}', [MovieController::class, 'update']);
     Route::post('/deleteMovie/{id}', [MovieController::class, 'delete']);
+});
+
+// Actor
+Route::group(['prefix' => 'actors'], function(){
+    Route::get('/', [ActorController::class, 'index']);
+    Route::get('/create', [Actorcontroller::class, 'create']);
+    Route::post('/insert', [ActorController::class, 'store']);
 });

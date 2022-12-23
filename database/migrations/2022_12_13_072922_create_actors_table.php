@@ -15,6 +15,7 @@ class CreateActorsTable extends Migration
     {
         Schema::create('actors', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->enum('gender', ['Male', 'Female']);
             $table->string('biography');
             $table->date('date_of_birth');

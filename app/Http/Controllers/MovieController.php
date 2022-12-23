@@ -50,11 +50,11 @@ class MovieController extends Controller
 
         $thumbnail = $request->file('image_thumbnail');
         $extension_thumbnail = $thumbnail->getClientOriginalExtension();
-        $file_thumbnail = time() . '.' . $extension_thumbnail;
+        $file_thumbnail = 'img_thumb'.time() . '.' . $extension_thumbnail;
 
         $background = $request->file('background');
         $extension_background = $background->getClientOriginalExtension();
-        $file_background = time() . '.' . $extension_background;
+        $file_background = 'img_bg'.time() . '.' . $extension_background;
 
         Storage::putFileAs('public/images/thumbnail/', $thumbnail, $file_thumbnail);
         Storage::putFileAs('public/images/background/', $background, $file_background);
@@ -92,7 +92,7 @@ class MovieController extends Controller
     }
 
     public function movieDetail($id){
-        $movie = Movie::where('id', $id)->get();
+        $movie = Movie::where('id', $id)->first();
 
         return view('movie.detail_movie', ['movie' => $movie]);
     }
@@ -145,7 +145,7 @@ class MovieController extends Controller
             Storage::delete('public/images/thumbnail/'.$movie->image_thumbnail);
             $thumbnail = $request->file('image_thumbnail');
             $extension_thumbnail = $thumbnail->getClientOriginalExtension();
-            $file_thumbnail = time() . '.' . $extension_thumbnail;
+            $file_thumbnail = 'img_thumb'.time() . '.' . $extension_thumbnail;
             Storage::putFileAs('public/images/thumbnail/', $thumbnail, $file_thumbnail);
             $data['image_thumbnail'] = $file_thumbnail;
         }
@@ -154,7 +154,7 @@ class MovieController extends Controller
             Storage::delete('public/images/thumbnail/'.$movie->background);
             $background = $request->file('background');
             $extension_background = $background->getClientOriginalExtension();
-            $file_background = time() . '.' . $extension_background;
+            $file_background = 'img_bg'.time() . '.' . $extension_background;
             Storage::putFileAs('public/images/background/', $background, $file_background);
             $data['background'] = $file_background;
         }
@@ -188,6 +188,9 @@ class MovieController extends Controller
 
         Storage::delete('public/images/thumbnail/'.$movie->image_thumbnail);
         Storage::delete('public/images/thumbnail/'.$movie->background);
+
+        GenreMovie::where('movie_id', $movie->id)->delete();
+        Character::where('movie_id', $movie->id)->delete();
 
         Movie::where('id', $id)->delete();
 
