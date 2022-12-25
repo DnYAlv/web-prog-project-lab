@@ -46,6 +46,12 @@ class ActorController extends Controller
         return redirect('/actors');
     }
 
+    public function actorDetail($id){
+        $actor = Actor::where('id', $id)->first();
+
+        return view('actor.detail_actor', ['actor' => $actor]);
+    }
+
     public function edit($id){
         $actor = Actor::where('id', $id)->first();
 
