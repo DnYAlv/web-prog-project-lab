@@ -31,8 +31,7 @@ class UserController extends Controller
         User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'image' => 'testingimage'
+            'password' => bcrypt($request->password)
         ]);
         return redirect('/login');
     }
@@ -59,6 +58,33 @@ class UserController extends Controller
             }
         }
         return redirect("/");
+    }
+
+    public function editProfile(){
+        $user = User::find(Auth::id());
+        return view('user.edit_profile', ['user' => $user]);
+    }
+
+    public function update(Request $request){
+        $rules = [
+            'name' => 'required|min:5|unique:users,name',
+            'email' => 'required|email|unique:users,email',
+            'date_of_birth' => 'required|date',
+            'phone' => 'required|min:5|max:13',
+            'image' => 'string'
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if($validator->fails()){
+            return back()->withErrors($validator);
+        }
+
+        $data = $request->all();
+        $user = User::find(Auth::id());
+        $user->update($data);
+
+        return redirect('/profile');
     }
 
     public function logoutUser() {

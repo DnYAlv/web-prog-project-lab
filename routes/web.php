@@ -31,10 +31,13 @@ Route::get('/register', function(){
 
 Route::post('/register', [UserController::class, 'register']);
 Route::post('/logout', [UserController::class, 'logoutUser']);
+Route::get('/profile', [UserController::class, 'editProfile']);
+Route::post('/profile/update', [UserController::class, 'update']);
 
 // Movie
 Route::group(['prefix' => 'movies'], function (){
     Route::get('/', [MovieController::class, 'index']);
+    Route::get('/detail', [MovieController::class, 'movieDetail']);
     Route::get('/create', [MovieController::class, 'create']);
     Route::post('/insert', [MovieController::class, 'store']);
     Route::get('/edit/{id}', [MovieController::class, 'edit']);
@@ -47,4 +50,7 @@ Route::group(['prefix' => 'actors'], function(){
     Route::get('/', [ActorController::class, 'index']);
     Route::get('/create', [Actorcontroller::class, 'create']);
     Route::post('/insert', [ActorController::class, 'store']);
+    Route::get('/edit/{id}', [ActorController::class, 'edit']);
+    Route::get('/editActor/{id}', [ActorControlelr::class, 'update']);
+    Route::post('/deleteActor/{id}', [ActorController::class, 'delete']);
 });
