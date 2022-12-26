@@ -24,15 +24,14 @@ Route::get('/login', function() {
     return view('auth.login');
 });
 
-Route::post('/login', [UserController::class, 'login']);
 Route::get('/register', function(){
     return view('auth.register');
 });
 
-Route::post('/register', [UserController::class, 'register']);
 Route::post('/logout', [UserController::class, 'logoutUser']);
 Route::get('/profile', [UserController::class, 'editProfile']);
 Route::post('/profile/update', [UserController::class, 'update']);
+
 
 // Movie
 Route::group(['prefix' => 'movies'], function (){
