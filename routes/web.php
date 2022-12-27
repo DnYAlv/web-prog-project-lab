@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// Route blm kelar semua, jd coba frontendnya dl sih
 Route::get('/', function () {
     return redirect('/login');
 });
@@ -23,6 +25,7 @@ Route::get('/home', function () {
     return redirect('/movies');
 });
 
+// Ini intinya gw buat middleware, jadi yg guest ini => if user already logged in, akan ke redirect ke home, trs ke movies
 Route::group(['middleware' => ['guest']], function(){
     Route::get('/login', function () {
         return view('auth.login');
@@ -46,11 +49,12 @@ Route::group(['prefix' => 'movies'], function () {
     Route::get('/', [MovieController::class, 'index']);
     Route::get('/detail/{id}', [MovieController::class, 'movieDetail']);
 
+    // Ini cek kalo admin baru bisa access ini
     Route::group(['middleware' => 'user-role'], function () {
         Route::get('/create', [MovieController::class, 'create']);
         Route::post('/insert', [MovieController::class, 'store']);
         Route::get('/edit/{id}', [MovieController::class, 'edit']);
-        Route::get('/editMovie/{id}', [MovieController::class, 'update']);
+        Route::post('/editMovie/{id}', [MovieController::class, 'update']);
         Route::post('/deleteMovie/{id}', [MovieController::class, 'delete']);
     });
 });
