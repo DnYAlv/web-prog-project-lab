@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActorController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -15,14 +16,41 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [MovieController::class, 'home']);
+Route::get('/', function () {
+    return redirect('/login');
+});
 
 Route::get('/login', function() {
     return view('auth.login');
 });
+
 Route::post('/login', [UserController::class, 'login']);
 Route::get('/register', function(){
     return view('auth.register');
 });
 
+Route::post('/register', [UserController::class, 'register']);
 Route::post('/logout', [UserController::class, 'logoutUser']);
+Route::get('/profile', [UserController::class, 'editProfile']);
+Route::post('/profile/update', [UserController::class, 'update']);
+
+// Movie
+Route::group(['prefix' => 'movies'], function (){
+    Route::get('/', [MovieController::class, 'index']);
+    Route::get('/detail', [MovieController::class, 'movieDetail']);
+    Route::get('/create', [MovieController::class, 'create']);
+    Route::post('/insert', [MovieController::class, 'store']);
+    Route::get('/edit/{id}', [MovieController::class, 'edit']);
+    Route::get('/editMovie/{id}', [MovieController::class, 'update']);
+    Route::post('/deleteMovie/{id}', [MovieController::class, 'delete']);
+});
+
+// Actor
+Route::group(['prefix' => 'actors'], function(){
+    Route::get('/', [ActorController::class, 'index']);
+    Route::get('/create', [Actorcontroller::class, 'create']);
+    Route::post('/insert', [ActorController::class, 'store']);
+    Route::get('/edit/{id}', [ActorController::class, 'edit']);
+    Route::get('/editActor/{id}', [ActorControlelr::class, 'update']);
+    Route::post('/deleteActor/{id}', [ActorController::class, 'delete']);
+});
