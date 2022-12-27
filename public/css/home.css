@@ -1,0 +1,26 @@
+
+/*
+.carousel-caption {
+
+}
+
+.carousel-inner {
+    display: flex;
+
+    padding: 1em;
+}
+
+.carousel-item {
+    display: block;
+    margin-right: 0;
+    flex: 0 0 calc(100%/4);
+}
+
+.card {
+    margin: 0 .5em;
+}
+
+.card-img-top {
+    width: 360px;
+    height: 360px;
+}
