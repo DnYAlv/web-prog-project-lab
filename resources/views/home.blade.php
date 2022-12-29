@@ -1,6 +1,3 @@
-<head>
-    <link rel="stylesheet" href="{{asset('css/home.css')}}">
-</head>
 @extends('template')
 @section('title', 'Home')
 @section('konten')
@@ -15,10 +12,10 @@
             @php($movie = $movies->random())
             <div class="carousel-item {{$i == 0 ? 'active' : ''}}">
                 <div style="height: 560px">
-                    <img class="w-100" src="{{asset('storage/images/' . $movie->background)}}" alt="...">
+                    <img class="w-100" src="{{asset('storage/images/background/' . $movie->background)}}" alt="{{asset('storage/images/background/' . $movie->background)}}">
                 </div>
                 <div class="carousel-caption d-none d-md-block">
-                    <p>{{$movie->genres->first()->genre_name}} | {{$movie->release_date}}</p>
+                    <p>fdsaf{{$movie->genres->first()->genre_name}} | {{$movie->release_date}}</p>
                     <h3>{{$movie->title}}</h3>
                     <p>{{$movie->description}}</p>
                 </div>
@@ -44,7 +41,7 @@
                 @php($movie = $movies->find($i))
                 <div class="col">
                     <div class="card" style="width: 18rem;">
-                        <img src="{{asset('storage/images/' . $movie->background)}}" class="card-img-top" alt="...">
+                        <img src="{{asset('storage/images/thumbnail/' . $movie->background)}}" class="card-img-top" alt="...">
                         <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
