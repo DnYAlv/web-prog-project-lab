@@ -14,7 +14,10 @@ use Illuminate\Support\Facades\Validator;
 class MovieController extends Controller
 {
     public function index(){
-        return view('movie.index');
+        $movies = Movie::all();
+        $genres = Genre::all();
+
+        return view('movie.index', ['movies' => $movies, 'genres' => $genres]);
     }
 
     public function create()
