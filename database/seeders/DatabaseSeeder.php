@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         \App\Models\Movie::factory(30)->create();
         $this->call([GenreSeeder::class]);
         \App\Models\GenreMovie::factory(40)->create();
+        \App\Models\Actor::factory(5)->create();
     }
 }
