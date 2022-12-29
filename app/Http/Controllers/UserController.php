@@ -87,8 +87,10 @@ class UserController extends Controller
         return redirect('/profile');
     }
 
-    public function logoutUser() {
+    public function logoutUser(Request $request) {
         Auth::logout();
+        $request->session()->invalidate();
+
         return redirect('/login');
     }
 
