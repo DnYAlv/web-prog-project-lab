@@ -2,14 +2,14 @@
 @section('title', 'Login')
 @section('konten')
 
-<div class="container-fluid">
+<div class="container-fluid p-5">
     <h1>Add Movie</h1>
     <div class="mb-3">
         <label for="title" class="form-label">Title</label>
         <input type="text" class="form-control" id="title">
     </div>
     <div class="mb-3">
-        <label for="title" class="form-label">Title</label>
+        <label for="title" class="form-label">Description</label>
         <textarea type="text" class="form-control" id="title" rows="8"></textarea>
     </div>
     <div class="mb-3">

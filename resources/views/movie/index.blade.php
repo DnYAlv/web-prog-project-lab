@@ -19,7 +19,7 @@
                     <h3>{{$movie->title}}</h3>
                     <p>{{$movie->description}}</p>
                     @auth
-                    @if (Auth::user()->role == 'customer')
+                    @if (Auth::user()->role == 'user')
                         <form action="#" method="post">
                             @csrf
                             <input type="hidden" id="id" name="id" value="{{ $movie->id }}">
@@ -125,15 +125,13 @@
   </div>
 
   @auth
-  @if (Auth::user()->role == 'customer')
-    <form class="text-end mx-5" action="#" method="post">
-        @csrf
-        <input type="hidden" id="id" name="id" value="{{ $movie->id }}">
-        <button class="btn btn-danger mx-2" type="submit">
+  @if (Auth::user()->role == 'admin')
+    <div class="text-end mx-5">
+        <a class="btn btn-danger" href="/movies/create">
             <i class="bi bi-plus-lg"></i>
             Add Movie
-        </button>
-    </form>
+        </a>
+    </div>
   @endif
   @endauth
   <div id="show" class="carousel slide py-5" data-bs-ride="true" data-bs-interval="false">

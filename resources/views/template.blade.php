@@ -29,7 +29,7 @@
 <body>
     <div class="container-fluid p-0" style="">
         <nav class="navbar navbar-expand-lg" style="background-color: #1F1F1F">
-            <div class="container-fluid">
+            <div class="container-fluid mx-5">
                 <a class="navbar-brand text-white" href="#"><span class="text-danger">Movie</span>List</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -45,9 +45,27 @@
                     <li class="nav-item">
                     <a class="nav-link text-white" href="/actors/">Actors</a>
                     </li>
+                    @auth
+                    @if (Auth::user()->role == 'user')
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">My Watchlist</a>
+                    </li>
+                    @endif
+                    @endauth
                 </ul>
-                <a class="btn btn-primary mx-2" href="/register">Register</a>
-                <a class="btn btn-outline-primary" href="/login">Login</a>
+                @auth
+                    <div class="dropdown mx-2">
+                        <i class="bi bi-person-circle text-white" style="font-size: 1.5rem" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                        <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                        </ul>
+                    </div>
+                @else
+                    <a class="btn btn-primary mx-2" href="/register">Register</a>
+                    <a class="btn btn-outline-primary" href="/login">Login</a>
+                @endauth
                 </div>
             </div>
         </nav>
@@ -65,7 +83,7 @@
                 <!--
                 <i class="bi bi-reddit mx-2"></i>
                 -->
-                <i class="bi bi-youtube mx-1"></i>
+                <i class="bi bi-youtube mx-2"></i>
             </div>
             <p>Privacy Policy | Terms of Service | Contact Us | About Us</p>
             <p>Copyright &#169; 2021 <span class="text-danger">Movie</span>List All Rights Reserved</p>

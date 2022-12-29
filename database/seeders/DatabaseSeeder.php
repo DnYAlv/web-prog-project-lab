@@ -14,7 +14,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call([UserSeeder::class]);
         \App\Models\Movie::factory(30)->create();
-        \App\Models\GenreMovie::factory(30)->create();
+        $this->call([GenreSeeder::class]);
+        \App\Models\GenreMovie::factory(40)->create();
     }
 }
