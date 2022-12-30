@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
         \App\Models\GenreMovie::factory(20)->create();
         \App\Models\Actor::factory(13)->create();
         \App\Models\Character::factory(40)->create();
+        $this->call([WatchlistSeeder::class]);
     }
 }

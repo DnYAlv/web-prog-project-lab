@@ -49,7 +49,7 @@
                     @auth
                     @if (Auth::user()->role == 'user')
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#">My Watchlist</a>
+                        <a class="nav-link text-white" href="/watchlist">My Watchlist</a>
                     </li>
                     @endif
                     @endauth

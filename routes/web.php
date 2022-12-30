@@ -3,6 +3,7 @@
 use App\Http\Controllers\ActorController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WatchlistController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +25,8 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return redirect('/movies');
 });
+
+Route::get('/watchlist', [WatchlistController::class, 'watchlist']);
 
 // Ini intinya gw buat middleware, jadi yg guest ini => if user already logged in, akan ke redirect ke home, trs ke movies
 Route::group(['middleware' => ['guest']], function(){
