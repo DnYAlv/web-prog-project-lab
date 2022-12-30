@@ -15,9 +15,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([UserSeeder::class]);
-        \App\Models\Movie::factory(30)->create();
+        \App\Models\Movie::factory(15)->create();
         $this->call([GenreSeeder::class]);
-        \App\Models\GenreMovie::factory(40)->create();
-        \App\Models\Actor::factory(5)->create();
+        \App\Models\GenreMovie::factory(20)->create();
+        \App\Models\Actor::factory(13)->create();
+        \App\Models\Character::factory(40)->create();
     }
 }

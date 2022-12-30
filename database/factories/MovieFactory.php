@@ -20,8 +20,8 @@ class MovieFactory extends Factory
             'description' => $this->faker->paragraph(2),
             'director' => $this->faker->name(),
             'release_date' => $this->faker->dateTime(),
-            'image_thumbnail' => 'movie' . ++$count . '.png',
-            'background' => 'movie' . $count . '.png',
+            'image_thumbnail' => 'movie_' . ++$count . '.jpg',
+            'background' => 'tmovie_' . $count . '.jpg',
         ];
     }
 }

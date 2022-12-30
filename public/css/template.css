@@ -21,3 +21,7 @@ select {
 .card {
     background-color: #121117 !important;
 }
+.vr {
+    color: red;
+    width: 2.5px;
+}

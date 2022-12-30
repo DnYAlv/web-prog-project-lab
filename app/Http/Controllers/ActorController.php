@@ -10,7 +10,9 @@ use Illuminate\Support\Facades\Validator;
 class ActorController extends Controller
 {
     public function index(){
-        return view('actor.index');
+        $actors = Actor::all();
+
+        return view('actor.index', ['actors' => $actors]);
     }
 
     public function create(){

@@ -15,9 +15,12 @@
                     <img class="w-100" src="{{asset('storage/images/background/' . $movie->background)}}" alt="...">
                 </div>
                 <div class="carousel-caption text-start w-25 mb-5 pb-5">
-                    <p>{{$movie->genres->first()->genre_name}} | {{$movie->release_date}}</p>
-                    <h3>{{$movie->title}}</h3>
-                    <p>{{$movie->description}}</p>
+                    <div class="">
+                        <p>{{$movie->genres->first()->genre_name}} | {{$movie->release_date}}</p>
+                        <h3>{{$movie->title}}</h3>
+                        <p>{{$movie->description}}</p>
+                    </div>
+
                     @auth
                     @if (Auth::user()->role == 'user')
                         <form action="#" method="post">
@@ -44,19 +47,21 @@
     </button>
 </div>
   <h3 class="m-3"><i class="bi bi-fire mx-2"></i>Popular</h3>
-  <div id="popular" class="carousel slide my-5" data-bs-ride="true" data-bs-interval="false">
+  <div id="popular" class="carousel slide my-5" data-bs-ride="true">
     <div class="carousel-inner">
-        @for ($i = 1; $i <= $movies->count(); $i++)
+        @for ($i = 1; $i <= $movies->count();)
         <div class="carousel-item {{$i == 1 ? 'active' : ''}}">
             <div class="row">
             @for ($j = 0; $j < 5; $i++, $j++)
                 @php($movie = $movies->find($i))
                 <div class="col">
                     <div class="card">
-                        <img height="360px" src="{{asset('storage/images/thumbnail/' . $movie->image_thumbnail)}}" class="card-img-top" alt="...">
+                        <a href="detail/{{$movie->id}}">
+                            <img height="360px" src="{{asset('storage/images/thumbnail/' . $movie->image_thumbnail)}}" class="card-img-top" alt="...">
+                        </a>
                         <div class="card-body">
                         <h5 class="card-title">{{$movie->title}}</h5>
-                        <p class="card-text text-muted">{{$movie->release_date}}</p>
+                        <p class="card-text text-muted">{{date('Y', strtotime($movie->release_date))}}</p>
                         </div>
                     </div>
                 </div>
@@ -81,7 +86,7 @@
     <div class="col-3">
         <form class="d-flex" role="search">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          </form>
+        </form>
     </div>
   </div>
   <hr>
@@ -134,19 +139,21 @@
     </div>
   @endif
   @endauth
-  <div id="show" class="carousel slide py-5" data-bs-ride="true" data-bs-interval="false">
+  <div id="show" class="carousel slide py-5" data-bs-ride="true">
     <div class="carousel-inner">
-        @for ($i = 1; $i <= $movies->count(); $i++)
+        @for ($i = 1; $i <= $movies->count();)
         <div class="carousel-item {{$i == 1 ? 'active' : ''}}">
             <div class="row">
             @for ($j = 0; $j < 5; $i++, $j++)
                 @php($movie = $movies->find($i))
                 <div class="col">
                     <div class="card">
-                        <img height="360px" src="{{asset('storage/images/thumbnail/' . $movie->image_thumbnail)}}" class="card-img-top" alt="...">
+                        <a href="detail/{{$movie->id}}">
+                            <img height="360px" src="{{asset('storage/images/thumbnail/' . $movie->image_thumbnail)}}" class="card-img-top" alt="...">
+                        </a>
                         <div class="card-body">
                         <h5 class="card-title">{{$movie->title}}</h5>
-                        <p class="card-text text-muted">{{$movie->release_date}}</p>
+                        <p class="card-text text-muted">{{date('Y', strtotime($movie->release_date))}}</p>
                         </div>
                     </div>
                 </div>
