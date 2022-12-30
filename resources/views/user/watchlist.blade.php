@@ -15,7 +15,7 @@
                 <option value="3">Finished</option>
             </select>
         </div>
-        <table class="table text-white">
+        <table class="table text-white text-center">
             <thead>
               <tr>
                 <th scope="col">Poster</th>
