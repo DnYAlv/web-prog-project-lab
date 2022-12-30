@@ -64,6 +64,7 @@ Route::group(['prefix' => 'actors'], function () {
     Route::get('/', [ActorController::class, 'index']);
     Route::get('/create', [Actorcontroller::class, 'create']);
     Route::post('/insert', [ActorController::class, 'store']);
+    Route::get('/detail/{id}', [ActorController::class, 'actorDetail']);
     Route::get('/edit/{id}', [ActorController::class, 'edit']);
     Route::get('/editActor/{id}', [ActorControlelr::class, 'update']);
     Route::post('/deleteActor/{id}', [ActorController::class, 'delete']);

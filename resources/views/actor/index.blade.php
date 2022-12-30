@@ -20,7 +20,7 @@
         @foreach ($actors as $a)
         <div class="col-3 p-3">
             <div class="card">
-                <a href="detail/{{$a->id}}">
+                <a href="detail/{{$a->id}}" class="m-3">
                     <img height="360px" src="{{asset('storage/images/actor/' . $a->image_url)}}" class="card-img-top" alt="...">
                 </a>
                 <div class="card-body bg-black">
