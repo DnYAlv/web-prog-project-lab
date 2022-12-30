@@ -58,7 +58,7 @@
                     <div class="dropdown mx-2">
                         <i class="bi bi-person-circle text-white" style="font-size: 1.5rem" data-bs-toggle="dropdown" aria-expanded="false"></i>
                         <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
-                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><a class="dropdown-item" href="/profile">Profile</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="/logout">Logout</a></li>
                         </ul>
