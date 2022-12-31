@@ -11,9 +11,14 @@
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 </form>
             </div>
-            <div class="col-4 text-end">
-                <button class="btn btn-danger">Add Actor</button>
-            </div>
+            @auth
+                @if (Auth::user()->role=='admin')
+                <div class="col-4 text-end">
+                    <button class="btn btn-danger">Add Actor</button>
+                </div>
+                @endif
+            @endauth
+
         </div>
     </div>
     <div class="row px-5">
