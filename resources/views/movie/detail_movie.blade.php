@@ -2,7 +2,7 @@
 @section('title', 'Login')
 @section('konten')
 <div class="card">
-    <img src="{{asset('storage/images/background/' . $movie->background)}}" class="card-img" alt="...">
+    <img src="{{asset('storage/images/background/' . $movie->background)}}" class="card-img opacity-75" alt="...">
     <div class="row card-img-overlay p-5">
         <div class="col-4">
             <img class="w-100" src="{{asset('storage/images/thumbnail/' . $movie->image_thumbnail)}}" class="card-img" alt="...">
