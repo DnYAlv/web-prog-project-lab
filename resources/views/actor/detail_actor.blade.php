@@ -4,7 +4,18 @@
 <div class="container-fluid p-5">
     <div class="row">
         <div class="col-3">
-            <img height="360px" src="{{asset('storage/images/actor/' . $actor->image_url)}}" class="card-img-top" alt="...">
+            <div class="position-relative">
+                <img height="360px" src="{{asset('storage/images/actor/' . $actor->image_url)}}" class="card-img-top bg-black p-2 opacity-75" alt="...">
+                <div class="col position-absolute top-0 end-0 mx-3">
+                    <div class="bg-danger rounded-circle p-1 my-2">
+                        <a href="#" class="bi bi-pencil-square mx-2 text-white" style="font-size: 1.8em"></a>
+                    </div>
+                    <div class="bg-danger rounded-circle p-1">
+                        <a href="#" class="bi bi-trash3 mx-2 text-white" style="font-size: 1.8em"></a>
+                    </div>
+                </div>
+            </div>
+
             <h3>Personal Info</h3>
             <h5>Popularity</h5>
             <p class="text-muted">{{$actor->popularity}}</p>

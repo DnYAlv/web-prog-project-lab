@@ -14,7 +14,7 @@
             @auth
                 @if (Auth::user()->role=='admin')
                 <div class="col-4 text-end">
-                    <button class="btn btn-danger">Add Actor</button>
+                    <a href="/actors/create" class="btn btn-danger">Add Actor</a>
                 </div>
                 @endif
             @endauth
