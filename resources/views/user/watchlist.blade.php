@@ -28,10 +28,10 @@
                 @foreach ($watchlists as $watchlist)
                     <tr>
                         <th scope="row" width="196px">
-                            <img width="148px" height="148px" src="{{asset('storage/images/thumbnail/' . $watchlist->movie->image_thumbnail)}}" alt="">
+                            <img width="148px" height="148px" src="{{asset('storage/images/thumbnail/' . $watchlist->image_thumbnail)}}" alt="">
                         </th>
-                        <td>{{$watchlist->movie->title}}</td>
-                        <td>{{$watchlist->watchlist_status}}</td>
+                        <td>{{$watchlist->title}}</td>
+                        <td>{{$watchlist->pivot->watchlist_status}}</td>
                         <td>
                             <i class="bi bi-three-dots"></i>
                         </td>
