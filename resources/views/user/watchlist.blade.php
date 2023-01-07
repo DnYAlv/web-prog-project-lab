@@ -25,13 +25,13 @@
               </tr>
             </thead>
             <tbody>
-                @foreach ($movies as $m)
+                @foreach ($watchlists as $watchlists)
                     <tr>
                         <th scope="row" width="196px">
-                            <img width="148px" height="148px" src="{{asset('storage/images/thumbnail/' . $m->image_thumbnail)}}" alt="">
+                            <img width="148px" height="148px" src="{{asset('storage/images/thumbnail/' . $watchlists->image_thumbnail)}}" alt="">
                         </th>
-                        <td>{{$m->title}}</td>
-                        <td>{{$m->pivot}}</td>
+                        <td>{{$watchlists->title}}</td>
+                        <td>{{$watchlists->pivot->watchlist_status}}</td>
                         <td>
                             <i class="bi bi-three-dots"></i>
                         </td>

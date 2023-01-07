@@ -12,7 +12,7 @@
             @php($movie = $movies->random())
             <div class="carousel-item {{$i == 0 ? 'active' : ''}}">
                 <div style="height: 560px">
-                    <img class="w-100 opacity-75" src="{{asset('storage/images/background/' . $movie->background)}}" alt="...">
+                    <img class="w-100 opacity-50" src="{{asset('storage/images/background/' . $movie->background)}}" alt="...">
                 </div>
                 <div class="carousel-caption text-start w-25 mb-5 pb-5">
                     <div class="">

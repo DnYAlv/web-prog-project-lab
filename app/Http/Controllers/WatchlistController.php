@@ -9,8 +9,9 @@ use Illuminate\Support\Facades\Auth;
 class WatchlistController extends Controller
 {
     public function watchlist() {
-        $movies = Auth::user()->movies;
+        $user = Auth::user();
+        $watchlists = $user->movies;
 
-        return view('user.watchlist', ['movies' => $movies]);
+        return view('user.watchlist', ['watchlists' => $watchlists]);
     }
 }

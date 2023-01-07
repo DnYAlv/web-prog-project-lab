@@ -19,6 +19,6 @@ class Movie extends Model
     }
 
     public function users(){
-        return $this->belongsToMany(User::class, 'watchlists', 'movie_id', 'user_id');
+        return $this->belongsToMany(User::class, 'watchlists', 'movie_id', 'user_id')->withPivot('watchlist_status');
     }
 }
