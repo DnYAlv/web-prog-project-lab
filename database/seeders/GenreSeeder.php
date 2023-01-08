@@ -15,40 +15,45 @@ class GenreSeeder extends Seeder
     public function run()
     {
         DB::table('genres')->insert([
-            'genre_name' => 'Action',
-        ]);
-        DB::table('genres')->insert([
-            'genre_name' => 'Comedy',
-        ]);
-        DB::table('genres')->insert([
-            'genre_name' => 'Crime',
-        ]);
-        DB::table('genres')->insert([
-            'genre_name' => 'Sci-Fi',
-        ]);
-        DB::table('genres')->insert([
-            'genre_name' => 'Drama',
-        ]);
-        DB::table('genres')->insert([
-            'genre_name' => 'Westerns',
-        ]);
-        DB::table('genres')->insert([
-            'genre_name' => 'Fantasy',
-        ]);
-        DB::table('genres')->insert([
-            'genre_name' => 'Horror',
-        ]);
-        DB::table('genres')->insert([
-            'genre_name' => 'Romance',
-        ]);
-        DB::table('genres')->insert([
-            'genre_name' => 'Thriller',
-        ]);
-        DB::table('genres')->insert([
-            'genre_name' => 'Animation',
-        ]);
-        DB::table('genres')->insert([
-            'genre_name' => 'Musical',
+            [
+                'genre_name' => 'Action'
+            ],
+            [
+                'genre_name' => 'Comedy'
+            ],
+            [
+                'genre_name' => 'Crime'
+            ],
+            [
+                'genre_name' => 'Sci-Fi'
+            ],
+            [
+                'genre_name' => 'Drama'
+            ],
+            [
+                'genre_name' => 'Westerns'
+            ],
+            [
+                'genre_name' => 'Fantasy'
+            ],
+            [
+                'genre_name' => 'Horror'
+            ],
+            [
+                'genre_name' => 'Romance'
+            ],
+            [
+                'genre_name' => 'Thriller'
+            ],
+            [
+                'genre_name' => 'Animation'
+            ],
+            [
+                'genre_name' => 'Musical'
+            ],
+            [
+                'genre_name' => 'Adventure'
+            ],
         ]);
     }
 }

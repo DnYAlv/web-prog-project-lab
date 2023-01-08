@@ -17,6 +17,13 @@
                         <div class="col d-flex align-items-center justify-content-end">
                             <a href="/movies/edit/{{$movie->id}}" class="bi bi-pencil-square mx-2 text-white" style="font-size: 1.8em"></a>
                             <a href="/movies/deleteMovie/{{$movie->id}}" class="bi bi-trash3 mx-2 text-white" style="font-size: 1.8em"></a>
+                            {{-- <form action="/movies/deleteMovie/{{$movie->id}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="mx-2 text-white" style="font-size: 1.8em">
+                                    <i class="bi bi-trash3" ></i>
+                                </button>
+                            </form> --}}
                         </div>
                     @endif
                 @endauth
@@ -60,7 +67,7 @@
     @foreach ($movie->actors as $a)
     <div class="col-3">
         <div class="card">
-            <a href="/movies/detail/{{$a->id}}">
+            <a href="/actors/detail/{{$a->id}}">
                 <img height="360px" src="{{Storage::url('images/actor/' . $a->image_url)}}" class="card-img-top" alt="...">
             </a>
             <div class="card-body bg-danger">

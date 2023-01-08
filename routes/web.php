@@ -18,13 +18,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Route blm kelar semua, jd coba frontendnya dl sih
-Route::get('/', function () {
-    return redirect('/login');
-})->name('login');
-
-Route::get('/home', function () {
-    return redirect('/movies');
-});
 
 Route::group(['middleware' => ['auth']], function(){
     Route::get('/watchlist', [WatchlistController::class, 'watchlist']);
@@ -47,8 +40,6 @@ Route::group(['middleware' => ['guest']], function(){
     Route::post('/register', [UserController::class, 'register']);
 });
 
-Route::get('/logout', [UserController::class, 'logoutUser']);
-
 // Movie
 Route::group(['prefix' => 'movies'], function () {
     Route::get('/', [MovieController::class, 'index']);
@@ -60,7 +51,7 @@ Route::group(['prefix' => 'movies'], function () {
         Route::post('/insert', [MovieController::class, 'store']);
         Route::get('/edit/{id}', [MovieController::class, 'edit']);
         Route::post('/editMovie/{id}', [MovieController::class, 'update']);
-        Route::post('/deleteMovie/{id}', [MovieController::class, 'delete']);
+        Route::get('/deleteMovie/{id}', [MovieController::class, 'delete']);
     });
 });
 
@@ -74,6 +65,16 @@ Route::group(['prefix' => 'actors'], function () {
         Route::post('/insert', [ActorController::class, 'store']);
         Route::get('/edit/{id}', [ActorController::class, 'edit']);
         Route::post('/editActor/{id}', [ActorController::class, 'update']);
-        Route::post('/deleteActor/{id}', [ActorController::class, 'delete']);
+        Route::get('/deleteActor/{id}', [ActorController::class, 'delete']);
     });
 });
+
+Route::get('/', function () {
+    return redirect('/login');
+})->name('login');
+
+Route::get('/home', function () {
+    return redirect('/movies');
+});
+
+Route::get('/logout', [UserController::class, 'logoutUser']);
