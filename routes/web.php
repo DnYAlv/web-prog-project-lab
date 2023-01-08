@@ -65,10 +65,13 @@ Route::group(['prefix' => 'movies'], function () {
 // Actor
 Route::group(['prefix' => 'actors'], function () {
     Route::get('/', [ActorController::class, 'index']);
-    Route::get('/create', [Actorcontroller::class, 'create']);
-    Route::post('/insert', [ActorController::class, 'store']);
     Route::get('/detail/{id}', [ActorController::class, 'actorDetail']);
-    Route::get('/edit/{id}', [ActorController::class, 'edit']);
-    Route::post('/editActor/{id}', [ActorController::class, 'update']);
-    Route::post('/deleteActor/{id}', [ActorController::class, 'delete']);
+
+    Route::group(['middleware' => 'user-role'], function(){
+        Route::get('/create', [Actorcontroller::class, 'create']);
+        Route::post('/insert', [ActorController::class, 'store']);
+        Route::get('/edit/{id}', [ActorController::class, 'edit']);
+        Route::post('/editActor/{id}', [ActorController::class, 'update']);
+        Route::post('/deleteActor/{id}', [ActorController::class, 'delete']);
+    });
 });
