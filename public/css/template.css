@@ -1,0 +1,27 @@
+input {
+    background-color: #1F1F1F !important;
+    border-color:#1F1F1F !important;
+    color: white !important;
+}
+textarea {
+    background-color: #1F1F1F !important;
+    border-color:#1F1F1F !important;
+    color: white !important;
+}
+select {
+    background-color: #1F1F1F !important;
+    border-color:#1F1F1F !important;
+    color: white !important;
+}
+.input-group-text {
+    background-color: #1F1F1F !important;
+    border-color:#1F1F1F !important;
+    color: white !important;
+}
+.card {
+    background-color: #121117 !important;
+}
+.vr {
+    color: red;
+    width: 2.5px;
+}

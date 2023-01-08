@@ -19,7 +19,7 @@ class CreateActorsTable extends Migration
             $table->enum('gender', ['Male', 'Female']);
             $table->string('biography');
             $table->date('date_of_birth');
-            $table->date('place_of_birth');
+            $table->string('place_of_birth');
             $table->string('image_url');
             $table->integer('popularity');
             $table->timestamps();

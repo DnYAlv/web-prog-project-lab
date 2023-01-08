@@ -14,18 +14,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-        DB::table('users')->insert([
-            'name' => 'Denny',
-            'email' => 'denny@gmail.com',
-            'password' => bcrypt('denny123')
-        ]);
-
-        DB::table('users')->insert([
-            'name' => 'admin',
-            'email' => 'admin@admin.com',
-            'password' => bcrypt('admin123'),
-            'role' => 'admin'
-        ]);
+        $this->call([UserSeeder::class]);
+        \App\Models\Movie::factory(15)->create();
+        $this->call([GenreSeeder::class]);
+        \App\Models\GenreMovie::factory(20)->create();
+        \App\Models\Actor::factory(13)->create();
+        \App\Models\Character::factory(40)->create();
+        $this->call([WatchlistSeeder::class]);
     }
 }
