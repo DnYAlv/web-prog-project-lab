@@ -2,13 +2,27 @@
 @section('title', 'Login')
 @section('konten')
 <div class="card">
-    <img src="{{asset('storage/images/background/' . $movie->background)}}" class="card-img" alt="...">
+    <img src="{{asset('storage/images/background/' . $movie->background)}}" class="card-img opacity-75" alt="...">
     <div class="row card-img-overlay p-5">
         <div class="col-4">
             <img class="w-100" src="{{asset('storage/images/thumbnail/' . $movie->image_thumbnail)}}" class="card-img" alt="...">
         </div>
         <div class="col mx-5">
-            <h1 class="card-title">{{$movie->title}}</h1>
+            <div class="row">
+                <div class="col">
+                    <h1 class="card-title">{{$movie->title}}</h1>
+                </div>
+                @auth
+                    @if (Auth::user()->role == 'admin')
+                        <div class="col d-flex align-items-center justify-content-end">
+                            <a href="/movies/edit/{{$movie->id}}" class="bi bi-pencil-square mx-2 text-white" style="font-size: 1.8em"></a>
+                            <a href="/movies/deleteMovie/{{$movie->id}}" class="bi bi-trash3 mx-2 text-white" style="font-size: 1.8em"></a>
+                        </div>
+                    @endif
+                @endauth
+
+            </div>
+
             @foreach ($movie->genres as $g)
                 <p type="button" class="btn btn-outline-secondary rounded-pill">
                     {{$g->genre_name}}
@@ -21,6 +35,22 @@
                 <p>{{$movie->description}}</p>
                 <h3>Director</h3>
                 <p>{{$movie->director}}</p>
+                @auth
+                    @if (Auth::user()->role == 'user')
+                        @if (true)
+                            <a href="#" class="btn btn-danger mx-2 w-50">
+                                <i class="bi bi-plus-lg"></i>
+                                Add to Watchlists
+                            </a>
+                        @else
+                            <a href="#" class="btn btn-danger mx-2 w-50">
+                                <i class="bi bi-x-lg"></i>
+                                Remove from Watchlists
+                            </a>
+                        @endif
+
+                    @endif
+                @endauth
             </div>
         </div>
     </div>

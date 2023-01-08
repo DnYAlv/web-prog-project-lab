@@ -22,7 +22,7 @@ class ActorController extends Controller
     public function store(Request $request){
         $rules = [
             'name' => 'required|string|min:3',
-            'gender' => 'required|in:Male, Female',
+            'gender' => 'required|in:Male,Female',
             'biography' => 'required|string|min:10',
             'date_of_birth' => 'required|date',
             'place_of_birth' => 'required|string',
@@ -41,6 +41,8 @@ class ActorController extends Controller
         $image = $request->file('image_url');
         $ext = $image->getClientOriginalExtension();
         $image_name = 'actor_img'.time().'.'.$ext;
+
+        $data['image_url'] = $image_name;
 
         Storage::putFileAs('public/images/actor/', $image, $image_name);
 
@@ -63,7 +65,7 @@ class ActorController extends Controller
     public function update(Request $request, $id){
         $rules = [
             'name' => 'required|string|min:3',
-            'gender' => 'required|in:Male, Female',
+            'gender' => 'required|in:Male,Female',
             'biography' => 'required|string|min:10',
             'date_of_birth' => 'required|date',
             'place_of_birth' => 'required|string',
@@ -90,7 +92,7 @@ class ActorController extends Controller
         }
 
         $actor->update($data);
-        return redirect('/actors/'.$actor->id);
+        return redirect('/actors/detail/'.$actor->id);
     }
 
     public function delete($id){

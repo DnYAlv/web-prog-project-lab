@@ -41,8 +41,5 @@
         </div>
         <p class="mt-3 form-text text-center">Already have an account? <a href="/login" class="text-danger">Sign In Now.</a></p>
     </form>
-    {{-- @if ($errors->any())
-        {{$errors->first()}}
-    @endif --}}
 </div>
 @endsection

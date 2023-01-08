@@ -49,8 +49,8 @@ class UserController extends Controller
             return redirect()->back()->with('error', 'Wrong Combination of Email and Password');
         }else{
             if($request->remember) {
-                Cookie::queue("email", $request->email, 120);
-                Cookie::queue("password", $request->password, 120);
+                Cookie::queue("email", $request->email,120);
+                Cookie::queue("password", $request->password,120);
             }
             else {
                 Cookie::queue(Cookie::forget("email"));
