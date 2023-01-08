@@ -22,7 +22,7 @@ class ActorController extends Controller
     public function store(Request $request){
         $rules = [
             'name' => 'required|string|min:3',
-            'gender' => 'required|in:Male, Female',
+            'gender' => 'required|in:Male,Female',
             'biography' => 'required|string|min:10',
             'date_of_birth' => 'required|date',
             'place_of_birth' => 'required|string',
