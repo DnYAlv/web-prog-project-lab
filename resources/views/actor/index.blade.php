@@ -26,7 +26,7 @@
         <div class="col-3 p-3">
             <div class="card">
                 <a href="/actors/detail/{{$a->id}}" class="m-3">
-                    <img height="360px" src="{{asset('storage/images/actor/' . $a->image_url)}}" class="card-img-top" alt="...">
+                    <img height="360px" src="{{Storage::url('images/actor/' . $a->image_url)}}" class="card-img-top" alt="...">
                 </a>
                 <div class="card-body bg-black">
                 <h5 class="card-title">{{$a->name}}</h5>
