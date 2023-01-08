@@ -20,13 +20,17 @@ use Illuminate\Support\Facades\Route;
 // Route blm kelar semua, jd coba frontendnya dl sih
 Route::get('/', function () {
     return redirect('/login');
-});
+})->name('login');
 
 Route::get('/home', function () {
     return redirect('/movies');
 });
 
-Route::get('/watchlist', [WatchlistController::class, 'watchlist']);
+Route::group(['middleware' => ['auth']], function(){
+    Route::get('/watchlist', [WatchlistController::class, 'watchlist']);
+    Route::get('/profile', [UserController::class, 'editProfile']);
+    Route::post('/profile/update', [UserController::class, 'update']);
+});
 
 // Ini intinya gw buat middleware, jadi yg guest ini => if user already logged in, akan ke redirect ke home, trs ke movies
 Route::group(['middleware' => ['guest']], function(){
@@ -44,8 +48,6 @@ Route::group(['middleware' => ['guest']], function(){
 });
 
 Route::get('/logout', [UserController::class, 'logoutUser']);
-Route::get('/profile', [UserController::class, 'editProfile']);
-Route::post('/profile/update', [UserController::class, 'update']);
 
 // Movie
 Route::group(['prefix' => 'movies'], function () {
