@@ -66,9 +66,9 @@ class MovieController extends Controller
         Storage::putFileAs('public/images/thumbnail/', $thumbnail, $file_thumbnail);
         Storage::putFileAs('public/images/background/', $background, $file_background);
 
-        $genre_id = $request->genreID;
-        $actor_id = $request->actorID;
-        $character_names = $request->charNames;
+        $genre_id = $request->genre_id;
+        $actor_id = $request->actor_id;
+        $character_names = $request->character_name;
 
         $data = $request->except(['genre_id', 'actor_id', 'character_name']);
         $data['image_thumbnail'] = $file_thumbnail;
