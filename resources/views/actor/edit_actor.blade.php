@@ -3,7 +3,7 @@
 @section('konten')
 
 <div class="container-fluid p-5">
-    <form action="editActor/{{$actors->id}}" method="POST" enctype="multipart/form-data">
+    <form action="/actors/editActor/{{$actors->id}}" method="POST" enctype="multipart/form-data">
         @csrf
         <h1>Edit Actor</h1>
         <div class="mb-3">

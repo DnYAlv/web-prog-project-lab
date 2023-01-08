@@ -21,7 +21,7 @@
             <textarea type="text" class="form-control" id="description" rows="8"></textarea>
         </div>
         @if ($errors->get('description'))
-            <strong> {{ $errors->first('description') }} </strong>
+            <strong> {{ $errors->first('description') }} <br></strong>
         @endif
 
         <!--Genres-->
@@ -35,10 +35,10 @@
                     @endforeach
                 </select>
             </div>
-            @if ($errors->get('genre_id'))
-                <strong> {{ $errors->first('genre_id') }} </strong>
-            @endif
         </div>
+        @if ($errors->get('genre_id.*'))
+            <strong> {{$errors->first('genre_id.*')}} </strong>
+        @endif
 
         <div class="text-end">
             <button type="button" class="btn btn-danger my-2" id="moregenre">Add More</button>
@@ -56,20 +56,21 @@
                             <option value="{{$a->id}}">{{$a->id}}. {{$a->name}}</option>
                         @endforeach
                     </select>
-                    @if ($errors->get('actor_id'))
-                        <strong> {{ $errors->first('actor_id') }} </strong>
+                    @if ($errors->get('actor_id.*'))
+                        <strong> {{ $errors->first('actor_id.*') }} </strong>
                     @endif
                 </div>
 
                 <div class="col">
                     <label for="character_name" class="form-label">Character Name</label>
                     <input type="text" class="form-control" id="character_name" name="character_name[]">
-                    @if ($errors->get('character_name'))
-                        <strong> {{ $errors->first('character_name') }} </strong>
+                    @if ($errors->get('character_name.*'))
+                        <strong> {{ $errors->first('character_name.*') }} </strong>
                     @endif
                 </div>
             </div>
         </div>
+
         <div class="text-end">
             <button type="button" class="btn btn-danger my-2" id="moreactor">Add More</button>
         </div>

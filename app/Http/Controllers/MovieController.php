@@ -36,7 +36,7 @@ class MovieController extends Controller
             'genre_id' => 'required|array',
             'genre_id.*' => 'required|numeric',
             'actor_id' => 'required|array',
-            'actor_id' => 'required|numeric',
+            'actor_id.*' => 'required|numeric',
             'character_name' => 'required|array',
             'character_name.*' => 'required|string',
             'director' => 'required|min:3',
@@ -45,7 +45,11 @@ class MovieController extends Controller
             'background' => 'required|image'
         ];
 
-        $validator = Validator::make($request->all(), $rules);
+        $messages = [
+            'genre_id.*.array' => "The Genre Field is Required."
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails()) {
             return back()->withErrors($validator);
