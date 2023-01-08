@@ -2,10 +2,10 @@
 @section('title', 'Login')
 @section('konten')
 <div class="card">
-    <img src="{{asset('storage/images/background/' . $movie->background)}}" class="card-img opacity-75" alt="...">
+    <img src="{{Storage::url('images/background/' . $movie->background)}}" class="card-img opacity-75" alt="...">
     <div class="row card-img-overlay p-5">
         <div class="col-4">
-            <img class="w-100" src="{{asset('storage/images/thumbnail/' . $movie->image_thumbnail)}}" class="card-img" alt="...">
+            <img class="w-100" src="{{Storage::url('images/thumbnail/' . $movie->image_thumbnail)}}" class="card-img" alt="...">
         </div>
         <div class="col mx-5">
             <div class="row">
@@ -60,8 +60,8 @@
     @foreach ($movie->actors as $a)
     <div class="col-3">
         <div class="card">
-            <a href="detail/{{$a->id}}">
-                <img height="360px" src="{{asset('storage/images/actor/' . $a->image_url)}}" class="card-img-top" alt="...">
+            <a href="/movies/detail/{{$a->id}}">
+                <img height="360px" src="{{Storage::url('images/actor/' . $a->image_url)}}" class="card-img-top" alt="...">
             </a>
             <div class="card-body bg-danger">
             <h5 class="card-title">{{$a->name}}</h5>
@@ -77,7 +77,7 @@
     @php($m = $movies->random())
     <div class="col">
         <div class="card">
-            <a href="detail/{{$m->id}}">
+            <a href="/movies/detail/{{$m->id}}">
                 <img height="360px" src="{{asset('storage/images/thumbnail/' . $m->image_thumbnail)}}" class="card-img-top" alt="...">
             </a>
             <div class="card-body bg-black">

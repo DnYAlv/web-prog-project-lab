@@ -59,7 +59,7 @@
                 @endif
                 <div class="col">
                     <div class="card">
-                        <a href="/detail/{{$movie->id}}">
+                        <a href="/movies/detail/{{$movie->id}}">
                             <img height="360px" src="{{Storage::url('images/thumbnail/' . $movie->image_thumbnail)}}" class="card-img-top" alt="...">
                         </a>
                         <div class="card-body">
@@ -154,7 +154,7 @@
                 @endif
                 <div class="col">
                     <div class="card">
-                        <a href="detail/{{$movie->id}}">
+                        <a href="/movies/detail/{{$movie->id}}">
                             <img height="360px" src="{{Storage::url('images/thumbnail/' . $movie->image_thumbnail)}}" class="card-img-top" alt="...">
                         </a>
                         <div class="card-body">
