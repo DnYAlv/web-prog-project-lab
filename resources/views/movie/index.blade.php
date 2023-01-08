@@ -12,7 +12,7 @@
             @php($movie = $movies->random())
             <div class="carousel-item {{$i == 0 ? 'active' : ''}}">
                 <div style="height: 560px">
-                    <img class="w-100 opacity-50" src="{{asset('storage/images/background/' . $movie->background)}}" alt="...">
+                    <img class="w-100 opacity-50" src="{{Storage::url('images/background/' . $movie->background)}}" alt="...">
                 </div>
                 <div class="carousel-caption text-start w-25 mb-5 pb-5">
                     <div class="">
@@ -54,10 +54,13 @@
             <div class="row">
             @for ($j = 0; $j < 5; $i++, $j++)
                 @php($movie = $movies->find($i))
+                @if (!$movie)
+                    @break
+                @endif
                 <div class="col">
                     <div class="card">
-                        <a href="detail/{{$movie->id}}">
-                            <img height="360px" src="{{asset('storage/images/thumbnail/' . $movie->image_thumbnail)}}" class="card-img-top" alt="...">
+                        <a href="/detail/{{$movie->id}}">
+                            <img height="360px" src="{{Storage::url('images/thumbnail/' . $movie->image_thumbnail)}}" class="card-img-top" alt="...">
                         </a>
                         <div class="card-body">
                         <h5 class="card-title">{{$movie->title}}</h5>
@@ -146,10 +149,13 @@
             <div class="row">
             @for ($j = 0; $j < 5; $i++, $j++)
                 @php($movie = $movies->find($i))
+                @if (!$movie)
+                    @break
+                @endif
                 <div class="col">
                     <div class="card">
                         <a href="detail/{{$movie->id}}">
-                            <img height="360px" src="{{asset('storage/images/thumbnail/' . $movie->image_thumbnail)}}" class="card-img-top" alt="...">
+                            <img height="360px" src="{{Storage::url('images/thumbnail/' . $movie->image_thumbnail)}}" class="card-img-top" alt="...">
                         </a>
                         <div class="card-body">
                         <h5 class="card-title">{{$movie->title}}</h5>

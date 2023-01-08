@@ -18,7 +18,7 @@
         <!--Description-->
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <textarea type="text" class="form-control" id="description" rows="8"></textarea>
+            <textarea type="text" class="form-control" id="description" rows="8" name="description"></textarea>
         </div>
         @if ($errors->get('description'))
             <strong> {{ $errors->first('description') }} <br></strong>
