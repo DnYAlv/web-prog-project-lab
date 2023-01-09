@@ -17,16 +17,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route blm kelar semua, jd coba frontendnya dl sih
-Route::get('/', function () {
-    return redirect('/login');
-});
+Route::group(['middleware' => ['auth']], function(){
+    Route::group(['prefix' => 'watchlist'], function(){
+        Route::get('/', [WatchlistController::class, 'index']);
+        Route::post('/create', [WatchlistController::class, 'store']);
+        Route::post('/delete/{id}', [WatchlistController::class, 'delete']);
+    });
 
-Route::get('/home', function () {
-    return redirect('/movies');
+    Route::group(['prefix' => 'profile'], function(){
+        Route::get('/', [UserController::class, 'editProfile']);
+        Route::post('/update', [UserController::class, 'update']);
+    });
 });
-
-Route::get('/watchlist', [WatchlistController::class, 'watchlist']);
 
 // Ini intinya gw buat middleware, jadi yg guest ini => if user already logged in, akan ke redirect ke home, trs ke movies
 Route::group(['middleware' => ['guest']], function(){
@@ -43,10 +45,6 @@ Route::group(['middleware' => ['guest']], function(){
     Route::post('/register', [UserController::class, 'register']);
 });
 
-Route::get('/logout', [UserController::class, 'logoutUser']);
-Route::get('/profile', [UserController::class, 'editProfile']);
-Route::post('/profile/update', [UserController::class, 'update']);
-
 // Movie
 Route::group(['prefix' => 'movies'], function () {
     Route::get('/', [MovieController::class, 'index']);
@@ -58,7 +56,7 @@ Route::group(['prefix' => 'movies'], function () {
         Route::post('/insert', [MovieController::class, 'store']);
         Route::get('/edit/{id}', [MovieController::class, 'edit']);
         Route::post('/editMovie/{id}', [MovieController::class, 'update']);
-        Route::post('/deleteMovie/{id}', [MovieController::class, 'delete']);
+        Route::get('/deleteMovie/{id}', [MovieController::class, 'delete']);
     });
 });
 
@@ -72,6 +70,16 @@ Route::group(['prefix' => 'actors'], function () {
         Route::post('/insert', [ActorController::class, 'store']);
         Route::get('/edit/{id}', [ActorController::class, 'edit']);
         Route::post('/editActor/{id}', [ActorController::class, 'update']);
-        Route::post('/deleteActor/{id}', [ActorController::class, 'delete']);
+        Route::get('/deleteActor/{id}', [ActorController::class, 'delete']);
     });
 });
+
+Route::get('/', function () {
+    return redirect('/login');
+})->name('login');
+
+Route::get('/home', function () {
+    return redirect('/movies');
+});
+
+Route::get('/logout', [UserController::class, 'logoutUser']);

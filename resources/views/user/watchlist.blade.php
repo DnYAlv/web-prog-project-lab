@@ -28,7 +28,7 @@
                 @foreach ($watchlists as $watchlists)
                     <tr>
                         <th scope="row" width="196px">
-                            <img width="148px" height="148px" src="{{asset('storage/images/thumbnail/' . $watchlists->image_thumbnail)}}" alt="">
+                            <img width="148px" height="148px" src="{{Storage::url('images/thumbnail/' . $watchlists->image_thumbnail)}}" alt="">
                         </th>
                         <td>{{$watchlists->title}}</td>
                         <td>{{$watchlists->pivot->watchlist_status}}</td>

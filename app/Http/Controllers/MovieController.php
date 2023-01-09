@@ -7,7 +7,10 @@ use App\Models\Character;
 use App\Models\Genre;
 use App\Models\GenreMovie;
 use App\Models\Movie;
+use App\Models\Watchlist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -45,11 +48,7 @@ class MovieController extends Controller
             'background' => 'required|image'
         ];
 
-        $messages = [
-            'genre_id.*.array' => "The Genre Field is Required."
-        ];
-
-        $validator = Validator::make($request->all(), $rules, $messages);
+        $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
             return back()->withErrors($validator);
@@ -101,9 +100,9 @@ class MovieController extends Controller
     public function movieDetail($id){
         $movie = Movie::where('id', $id)->first();
         //Need to show more movies, so added a variable to store all Movie data
-        $movies = Movie::all();
+        $other = Movie::where('id', '!=', $id)->paginate(5);
 
-        return view('movie.detail_movie', ['movie' => $movie, 'movies' => $movies]);
+        return view('movie.detail_movie', ['movie' => $movie, 'movies' => $other]);
     }
 
     public function edit($id){
@@ -194,14 +193,19 @@ class MovieController extends Controller
 
     public function delete($id){
         $movie = Movie::where('id', $id)->first();
-
-        Storage::delete('public/images/thumbnail/'.$movie->image_thumbnail);
-        Storage::delete('public/images/thumbnail/'.$movie->background);
+        // Storage::delete('public/images/thumbnail/'.$movie->image_thumbnail);
+        // Storage::delete('public/images/thumbnail/'.$movie->background);
 
         GenreMovie::where('movie_id', $movie->id)->delete();
         Character::where('movie_id', $movie->id)->delete();
+        // DB::table('genre_movies')->where('movie_id', $movie->id)->delete();
+
+        // DB::table('characters')->where('movie_id', $movie->id)->delete();
+
+        Watchlist::where('movie_id', $movie->id)->where('user_id', Auth::id())->delete();
 
         Movie::where('id', $id)->delete();
+        // Movie::destroy($movie->id);
 
         return redirect('/movies');
     }

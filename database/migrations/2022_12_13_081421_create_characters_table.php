@@ -15,8 +15,8 @@ class CreateCharactersTable extends Migration
     {
         Schema::create('characters', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('actor_id')->constrained('actors');
-            $table->foreignId('movie_id')->constrained('movies');
+            $table->foreignId('actor_id')->constrained('actors')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('movie_id')->constrained('movies')->onDelete('cascade')->onUpdate('cascade');
             $table->string('character_name');
             $table->timestamps();
         });

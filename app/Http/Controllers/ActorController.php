@@ -99,10 +99,10 @@ class ActorController extends Controller
         $actor = Actor::where('id', $id)->first();
 
         if($actor->movies()->count()){
-            return redirect('/actors/'.$actor->id)->with('error', 'This Actor, '.$actor->name.' can\'t be deleted since this actor is in the '.$actor->movies()->first()->title.' movie');
+            return redirect('/actors/detail/'.$actor->id)->with('error', 'This Actor, '.$actor->name.' can\'t be deleted since this actor plays a movie');
         }
 
-        Storage::delete('public/images/actor/'.$actor->image_url);
+        // Storage::delete('public/images/actor/'.$actor->image_url);
         Actor::where('id', $id)->delete();
 
         return redirect('/actors');
