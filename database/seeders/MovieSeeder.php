@@ -61,7 +61,7 @@ class MovieSeeder extends Seeder
                 'description' => 'US agent Luke Hobbs and British mercenary Deckard Shaw are forced to put their rivalry side and work together to stop a genetically enhanced supervillain.',
                 'director' => 'David Leitch',
                 'release_date' => '2019-07-31',
-                'image_thumbnail' => 'fast-furious-hobbs-shaw-thumb.jpeg',
+                'image_thumbnail' => 'fast-furious-hobbs-shaw-thumb.jpg',
                 'background' => 'fast-furious-hobbs-shaw-bg.jpg'
             ]
         ]);

@@ -10,24 +10,28 @@
                 <div class="position-relative">
                     <img height="360px" src="{{ Storage::url('images/actor/' . $actor->image_url) }}"
                         class="card-img-top bg-black p-2 opacity-75" alt="...">
-                    <div class="col position-absolute top-0 end-0 mx-3">
-                        <div class="bg-danger rounded-circle p-1 my-2">
-                            <a href="{{ url('actors/edit/' . $actor->id) }}" class="bi bi-pencil-square ms-3 text-white"
-                                style="font-size: 1.8em"></a>
-                        </div>
-                        <div class="bg-danger rounded-circle">
-                            {{-- <form action="{{'/actors/deleteActor/' . $actor->id}}" method="POST">
-                                @csrf
-                                @method('DELETE')
+                    @auth
+                        @if (Auth::user()->role == 'admin')
+                            <div class="col position-absolute top-0 end-0 mx-3">
+                                <div class="bg-danger rounded-circle p-1 my-2">
+                                    <a href="{{ url('actors/edit/' . $actor->id) }}" class="bi bi-pencil-square ms-3 text-white"
+                                        style="font-size: 1.8em"></a>
+                                </div>
+                                <div class="bg-danger rounded-circle">
+                                    {{-- <form action="{{'/actors/deleteActor/' . $actor->id}}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
 
-                                <button type="submit" class="btn mx-2 text-white" style="font-size: 1.8em">
-                                    <i class="bi bi-trash3" ></i>
-                                </button>
-                            </form> --}}
-                           <a href="/actors/deleteActor/{{ $actor->id }}" class="btn bi bi-trash3 mx-2 text-white" style="font-size: 1.8em"></a>
+                                        <button type="submit" class="btn mx-2 text-white" style="font-size: 1.8em">
+                                            <i class="bi bi-trash3" ></i>
+                                        </button>
+                                    </form> --}}
+                                <a href="/actors/deleteActor/{{ $actor->id }}" class="btn bi bi-trash3 mx-2 text-white" style="font-size: 1.8em"></a>
 
-                        </div>
-                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    @endauth
                 </div>
 
                 <h3>Personal Info</h3>

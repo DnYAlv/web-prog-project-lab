@@ -17,12 +17,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route blm kelar semua, jd coba frontendnya dl sih
-
 Route::group(['middleware' => ['auth']], function(){
-    Route::get('/watchlist', [WatchlistController::class, 'watchlist']);
-    Route::get('/profile', [UserController::class, 'editProfile']);
-    Route::post('/profile/update', [UserController::class, 'update']);
+    Route::group(['prefix' => 'watchlist'], function(){
+        Route::get('/', [WatchlistController::class, 'index']);
+        Route::post('/create', [WatchlistController::class, 'store']);
+        Route::post('/delete/{id}', [WatchlistController::class, 'delete']);
+    });
+
+    Route::group(['prefix' => 'profile'], function(){
+        Route::get('/', [UserController::class, 'editProfile']);
+        Route::post('/update', [UserController::class, 'update']);
+    });
 });
 
 // Ini intinya gw buat middleware, jadi yg guest ini => if user already logged in, akan ke redirect ke home, trs ke movies

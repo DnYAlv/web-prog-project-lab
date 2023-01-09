@@ -2,7 +2,7 @@
 @section('title', 'Login')
 @section('konten')
 <div class="card">
-    <img src="{{Storage::url('images/background/' . $movie->background)}}" class="card-img opacity-75" alt="...">
+    <img src="{{Storage::url('images/background/' . $movie->background)}}" class="card-img opacity-2" alt="...">
     <div class="row card-img-overlay p-5">
         <div class="col-4">
             <img class="w-100" src="{{Storage::url('images/thumbnail/' . $movie->image_thumbnail)}}" class="card-img" alt="...">
@@ -31,7 +31,7 @@
             </div>
 
             @foreach ($movie->genres as $g)
-                <p type="button" class="btn btn-outline-secondary rounded-pill">
+                <p type="button" class="btn btn-outline-light rounded-pill">
                     {{$g->genre_name}}
                 </p>
             @endforeach
@@ -71,8 +71,8 @@
                 <img height="360px" src="{{Storage::url('images/actor/' . $a->image_url)}}" class="card-img-top" alt="...">
             </a>
             <div class="card-body bg-danger">
-            <h5 class="card-title">{{$a->name}}</h5>
-            <p class="card-text text-muted">{{$a->pivot}}</p>
+                <h5 class="card-title">{{$a->name}}</h5>
+                <p class="card-text">{{$a->pivot->character_name}}</p>
             </div>
         </div>
     </div>
@@ -80,19 +80,18 @@
 </div>
 <div class="row p-5">
     <h3><div class="vr me-2"></div>More</h3>
-    @for ($i=0; $i<5; ++$i)
-    @php($m = $movies->random())
-    <div class="col">
-        <div class="card">
-            <a href="/movies/detail/{{$m->id}}">
-                <img height="360px" src="{{asset('storage/images/thumbnail/' . $m->image_thumbnail)}}" class="card-img-top" alt="...">
-            </a>
-            <div class="card-body bg-black">
-            <h5 class="card-title">{{$m->title}}</h5>
-            <p class="card-text text-muted">{{date('Y', strtotime($m->release_date))}}</p>
+    @foreach ($movies as $m)
+        <div class="col">
+            <div class="card">
+                <a href="/movies/detail/{{$m->id}}">
+                    <img height="360px" src="{{Storage::url('images/thumbnail/' . $m->image_thumbnail)}}" class="card-img-top" alt="...">
+                </a>
+                <div class="card-body bg-black">
+                <h5 class="card-title">{{$m->title}}</h5>
+                <p class="card-text text-muted">{{date('Y', strtotime($m->release_date))}}</p>
+                </div>
             </div>
         </div>
-    </div>
-    @endfor
+    @endforeach
 </div>
 @endsection

@@ -15,8 +15,8 @@ class CreateWatchlistsTable extends Migration
     {
         Schema::create('watchlists', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('movie_id')->constrained('movies');
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('movie_id')->constrained('movies')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->enum('watchlist_status', ['Planned', 'Watching', 'Finished']);
             $table->timestamps();
         });
