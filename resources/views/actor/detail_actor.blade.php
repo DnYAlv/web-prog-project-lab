@@ -18,16 +18,7 @@
                                         style="font-size: 1.8em"></a>
                                 </div>
                                 <div class="bg-danger rounded-circle">
-                                    {{-- <form action="{{'/actors/deleteActor/' . $actor->id}}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-
-                                        <button type="submit" class="btn mx-2 text-white" style="font-size: 1.8em">
-                                            <i class="bi bi-trash3" ></i>
-                                        </button>
-                                    </form> --}}
-                                <a href="/actors/deleteActor/{{ $actor->id }}" class="btn bi bi-trash3 mx-2 text-white" style="font-size: 1.8em"></a>
-
+                                    <a href="/actors/deleteActor/{{ $actor->id }}" class="btn bi bi-trash3 mx-2 text-white" style="font-size: 1.8em"></a>
                                 </div>
                             </div>
                         @endif

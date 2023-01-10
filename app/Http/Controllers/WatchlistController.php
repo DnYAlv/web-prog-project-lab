@@ -5,13 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Watchlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class WatchlistController extends Controller
 {
-    public function index() {
-        $user = Auth::user();
-        $watchlists = $user->movies;
-
+    public function index(Request $request) {
+        $watchlist_status = $request->query('watchlist_status', '');
+        $search = $request->query('search', '');
+        $watchlists = Watchlist::with('movie')
+            ->where('user_id', Auth::id())
+            ->withWatchlistStatus($watchlist_status)
+            ->withSearch($search)
+            ->paginate(5);
         return view('user.watchlist', ['watchlists' => $watchlists]);
     }
 
@@ -21,7 +26,7 @@ class WatchlistController extends Controller
             'user_id' => Auth::id()
         ]);
 
-        return redirect('/movies');
+        return redirect()->back();
     }
 
     public function delete($id){

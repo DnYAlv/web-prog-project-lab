@@ -123,7 +123,7 @@ class MovieController extends Controller
             'genre_id' => 'required|array',
             'genre_id.*' => 'required|numeric',
             'actor_id' => 'required|array',
-            'actor_id' => 'required|numeric',
+            'actor_id.*' => 'required|numeric',
             'character_name' => 'required|array',
             'character_name.*' => 'required|string',
             'director' => 'required|min:3',
@@ -140,9 +140,9 @@ class MovieController extends Controller
 
         $data = $request->except(['genre_id', 'actor_id', 'character_name']);
 
-        $genre_id = $request->genreID;
-        $actor_id = $request->actorID;
-        $character_names = $request->charNames;
+        $genre_id = $request->genre_id;
+        $actor_id = $request->actor_id;
+        $character_names = $request->character_name;
 
         $movie = Movie::where('id', $id)->first();
 
@@ -188,24 +188,20 @@ class MovieController extends Controller
         }
         Character::insert($actor_data);
 
-        return redirect('/movies/'.$movie->id);
+        return redirect('/movies/detail/'.$movie->id);
     }
 
     public function delete($id){
         $movie = Movie::where('id', $id)->first();
-        // Storage::delete('public/images/thumbnail/'.$movie->image_thumbnail);
-        // Storage::delete('public/images/thumbnail/'.$movie->background);
+        Storage::delete('public/images/thumbnail/'.$movie->image_thumbnail);
+        Storage::delete('public/images/background/'.$movie->background);
 
         GenreMovie::where('movie_id', $movie->id)->delete();
         Character::where('movie_id', $movie->id)->delete();
-        // DB::table('genre_movies')->where('movie_id', $movie->id)->delete();
-
-        // DB::table('characters')->where('movie_id', $movie->id)->delete();
 
         Watchlist::where('movie_id', $movie->id)->where('user_id', Auth::id())->delete();
 
         Movie::where('id', $id)->delete();
-        // Movie::destroy($movie->id);
 
         return redirect('/movies');
     }

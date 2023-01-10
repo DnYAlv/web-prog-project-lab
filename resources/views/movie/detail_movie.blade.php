@@ -17,13 +17,6 @@
                         <div class="col d-flex align-items-center justify-content-end">
                             <a href="/movies/edit/{{$movie->id}}" class="bi bi-pencil-square mx-2 text-white" style="font-size: 1.8em"></a>
                             <a href="/movies/deleteMovie/{{$movie->id}}" class="bi bi-trash3 mx-2 text-white" style="font-size: 1.8em"></a>
-                            {{-- <form action="/movies/deleteMovie/{{$movie->id}}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="mx-2 text-white" style="font-size: 1.8em">
-                                    <i class="bi bi-trash3" ></i>
-                                </button>
-                            </form> --}}
                         </div>
                     @endif
                 @endauth
@@ -43,19 +36,36 @@
                 <h3>Director</h3>
                 <p>{{$movie->director}}</p>
                 @auth
+                    @php
+                        $alreadyAdded = false;
+                    @endphp
                     @if (Auth::user()->role == 'user')
-                        @if (true)
-                            <a href="#" class="btn btn-danger mx-2 w-50">
-                                <i class="bi bi-plus-lg"></i>
-                                Add to Watchlists
-                            </a>
+                        @foreach ($movie->users as $user)
+                            @if ($user->id == Auth::id())
+                                @php
+                                    $alreadyAdded = true;
+                                @endphp
+                            @endif
+                        @endforeach
+                        @if ($alreadyAdded)
+                            <form action="/watchlist/delete/{{ $movie->id }}" method="post" enctype="multipart/form-data">
+                                @csrf
+                                <input type="hidden" id="id" name="movie_id" value="{{ $movie->id }}">
+                                <button class="btn btn-danger mx-2 w-30" type="submit">
+                                    <i class="bi-x-lg"></i>
+                                    Remove From Watchlist
+                                </button>
+                            </form>
                         @else
-                            <a href="#" class="btn btn-danger mx-2 w-50">
-                                <i class="bi bi-x-lg"></i>
-                                Remove from Watchlists
-                            </a>
+                            <form action="/watchlist/create" method="post" enctype="multipart/form-data">
+                                @csrf
+                                <input type="hidden" id="id" name="movie_id" value="{{ $movie->id }}">
+                                <button class="btn btn-primary mx-2 w-30" type="submit">
+                                    <i class="bi-plus-lg"></i>
+                                    Add to Watchlist
+                                </button>
+                            </form>
                         @endif
-
                     @endif
                 @endauth
             </div>
