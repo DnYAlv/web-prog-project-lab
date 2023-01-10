@@ -26,7 +26,7 @@ class WatchlistController extends Controller
             'user_id' => Auth::id()
         ]);
 
-        return redirect('/movies');
+        return redirect()->back();
     }
 
     public function delete($id){

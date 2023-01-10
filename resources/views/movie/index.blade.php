@@ -5,10 +5,7 @@
     .carousel-control-prev,
     .carousel-control-next {
         position: absolute;
-        /* top: 50; */
         width: 30px;
-        /* height: 50px; */
-        /* left: 0; */
     }
 
 </style>
