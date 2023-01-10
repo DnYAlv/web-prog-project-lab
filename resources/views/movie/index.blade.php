@@ -96,7 +96,7 @@
                     <div class="row">
                         @php
                             $start = $i * 5;
-                            $end = $start + 5;
+                            $end = 5;
                             $subset = $movies->slice($start, $end);
                         @endphp
                         @foreach ($subset as $movie)
@@ -206,7 +206,7 @@
                 <div class="row">
                     @php
                         $start = $i * 5;
-                        $end = $start + 5;
+                        $end = 5;
                         $subset = $movies->slice($start, $end);
                     @endphp
                     @foreach ($subset as $movie)
