@@ -53,7 +53,7 @@
                     <select class="form-select" id="actor" name="actor_id[]">
                         <option selected value=""> -- Open this select menu -- </option>
                         @foreach ($actors as $a)
-                            <option value="{{$a->id}}">{{$a->id}}. {{$a->name}}</option>
+                            <option value="{{$a->id}}">{{$a->name}}</option>
                         @endforeach
                     </select>
                     @if ($errors->get('actor_id.*'))

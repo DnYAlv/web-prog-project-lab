@@ -25,7 +25,7 @@
         @endif
 
         {{-- Genres --}}
-        <label for="title" class="form-label">Genre</label>
+        <label for="genres" class="form-label">Genre</label>
         <div id="genres">
             <div class="row mb-3 mx-0">
                 <select class="form-select" id="genre" name="genre_id[]">
@@ -41,7 +41,7 @@
         @endif
 
         <div class="text-end">
-            <button class="btn btn-danger my-2" id="moregenre">Add More</button>
+            <button type="button" class="btn btn-danger my-2" id="moregenre">Add More</button>
         </div>
 
         {{-- Actors --}}
@@ -60,7 +60,7 @@
                         <strong>{{ $errors->first('actor_id.*') }}</strong>
                     @endif
                 </div>
-                
+
                 <div class="col">
                     <label for="character_name" class="form-label">Character Name</label>
                     <input type="text" class="form-control" id="character_name" name="character_name[]">
@@ -71,13 +71,13 @@
             </div>
         </div>
         <div class="text-end">
-            <button class="btn btn-danger my-2" id="moreactor">Add More</button>
+            <button type="button" class="btn btn-danger my-2" id="moreactor">Add More</button>
         </div>
 
         {{-- Director --}}
         <div class="mb-3">
-            <label for="title" class="form-label">Director</label>
-            <input type="text" class="form-control" id="title" name="director">
+            <label for="director" class="form-label">Director</label>
+            <input type="text" class="form-control" id="director" name="director">
         </div>
         @if ($errors->get('director'))
             <strong>{{ $errors->first('director') }}</strong>
@@ -85,8 +85,8 @@
 
         {{-- Release Date --}}
         <div class="mb-3">
-            <label for="title" class="form-label">Release Date</label>
-            <input type="date" class="form-control" id="title" name="release_date">
+            <label for="release_date" class="form-label">Release Date</label>
+            <input type="date" class="form-control" id="release_date" name="release_date">
         </div>
         @if ($errors->get('release_date'))
             <strong> {{ $errors->first('release_date') }} </strong>
@@ -94,8 +94,8 @@
 
         {{-- Image Thumbnail --}}
         <div class="mb-3">
-            <label for="title" class="form-label">Image Url</label>
-            <input type="file" class="form-control" id="title" name="image_thumbnail">
+            <label for="image_thumbnail" class="form-label">Image Url</label>
+            <input type="file" class="form-control" id="image_thumbnail" name="image_thumbnail">
         </div>
         @if ($errors->get('image_thumbnail'))
             <strong> {{ $errors->first('image_thumbnail') }} </strong>
@@ -103,8 +103,8 @@
 
         {{-- Background --}}
         <div class="mb-3">
-            <label for="title" class="form-label">Background Url</label>
-            <input type="file" class="form-control" id="title" name="background">
+            <label for="background" class="form-label">Background Url</label>
+            <input type="file" class="form-control" id="background" name="background">
         </div>
         <button type="submit" class="btn btn-danger w-100 my-3">Edit</button>
     </form>
