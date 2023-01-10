@@ -1,6 +1,17 @@
 @extends('template')
 @section('title', 'Home')
 @section('konten')
+<style>
+    .carousel-control-prev,
+    .carousel-control-next {
+        position: absolute;
+        /* top: 50; */
+        width: 30px;
+        /* height: 50px; */
+        /* left: 0; */
+    }
+
+</style>
     {{-- Carousel 3 Random Images --}}
     <div id="header" class="carousel slide" data-bs-ride="false">
         <div class="carousel-indicators">
@@ -45,7 +56,7 @@
                                         @csrf
                                         <input type="hidden" id="id" name="movie_id" value="{{ $movie->id }}">
                                         <button class="btn btn-success mx-2 w-50" type="submit">
-                                            <i class="bi bi-checked-lg"></i>
+                                            <i class="bi bi-check-lg"></i>
                                             Already Added
                                         </button>
                                     </form>
@@ -211,8 +222,42 @@
                                 </a>
                                 <div class="card-body">
                                     <h5 class="card-title">{{ $movie->title }}</h5>
-                                    <p class="card-text text-muted">{{ date('Y', strtotime($movie->release_date)) }}
-                                    </p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p class="card-text text-muted">{{ date('Y', strtotime($movie->release_date)) }}
+                                        </p>
+                                        @auth
+                                            @php
+                                                $alreadyAdded = false;
+                                            @endphp
+                                            @if (Auth::user()->role == 'user')
+                                                @foreach ($movie->users as $user)
+                                                    @if ($user->id == Auth::id())
+                                                        @php
+                                                            $alreadyAdded = true;
+                                                        @endphp
+                                                    @endif
+                                                @endforeach
+                                                @if ($alreadyAdded)
+                                                    <form action="/watchlist/delete/{{ $movie->id }}" method="post"
+                                                        enctype="multipart/form-data">
+                                                        @csrf
+                                                        <input type="hidden" id="id" name="movie_id" value="{{ $movie->id }}">
+                                                        <button class="btn btn-success mx-2 w-30" type="submit">
+                                                            <i class="bi-check-lg"></i>
+                                                        </button>
+                                                    </form>
+                                                @else
+                                                    <form action="/watchlist/create" method="post" enctype="multipart/form-data">
+                                                        @csrf
+                                                        <input type="hidden" id="id" name="movie_id" value="{{ $movie->id }}">
+                                                        <button class="btn btn-primary mx-2 w-30" type="submit">
+                                                            <i class="bi-plus-lg"></i>
+                                                        </button>
+                                                    </form>
+                                                @endif
+                                            @endif
+                                        @endauth
+                                    </div>
                                 </div>
                             </div>
                         </div>

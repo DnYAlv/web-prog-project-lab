@@ -7,7 +7,7 @@
         @csrf
         <div class="input-group mb-3">
             <span class="input-group-text w-25">Username</span>
-            <input type="text" name="username" id="username" class="form-control" placeholder="Enter your username">
+            <input type="text" name="name" id="username" class="form-control" placeholder="Enter your username">
         </div>
         @if ($errors->get('username'))
             <strong> {{ $errors->first('username') }} </strong>
@@ -28,10 +28,10 @@
         @endif
         <div class="input-group mb-3">
             <span class="input-group-text">Confirm Password</span>
-            <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="Enter your confirm password">
+            <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="Enter your confirm password">
         </div>
-        @if ($errors->get('email'))
-            <strong> {{ $errors->first('email') }} </strong>
+        @if ($errors->get('password_confirmation'))
+            <strong> {{ $errors->first('password_confirmation') }} </strong>
         @endif
         <div class="mb-3 d-grid mx-auto">
             <button class="btn btn-danger" type="submit">

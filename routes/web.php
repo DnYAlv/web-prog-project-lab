@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['auth']], function(){
     Route::group(['prefix' => 'watchlist'], function(){
-        Route::get('/', [WatchlistController::class, 'index']);
+        Route::get('/', [WatchlistController::class, 'index'])->name('watchlist');
         Route::post('/create', [WatchlistController::class, 'store']);
         Route::post('/delete/{id}', [WatchlistController::class, 'delete']);
     });
