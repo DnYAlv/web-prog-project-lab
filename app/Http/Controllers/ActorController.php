@@ -9,8 +9,9 @@ use Illuminate\Support\Facades\Validator;
 
 class ActorController extends Controller
 {
-    public function index(){
-        $actors = Actor::all();
+    public function index(Request $request){
+        $search = $request->search;
+        $actors = Actor::where('name', 'like', "%{$search}%")->get();
 
         return view('actor.index', ['actors' => $actors]);
     }
