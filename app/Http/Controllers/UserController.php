@@ -15,14 +15,10 @@ class UserController extends Controller
         $rules = [
             'name' => 'required|min:5|string|unique:users,name',
             'email' => 'required|string|email|unique:users,email',
-            'password' => 'required|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]*$/|min:6|confirmed'
+            'password' => 'required|alpha_num|min:6|confirmed'
         ];
 
-        $messages = [
-            'password.regex' => "The password must contain both alphabetical and numerical characters"
-        ];
-
-        $validator = Validator::make($request->all(), $rules, $messages);
+        $validator = Validator::make($request->all(), $rules);
 
         if($validator->fails()){
             return back()->withErrors($validator);
