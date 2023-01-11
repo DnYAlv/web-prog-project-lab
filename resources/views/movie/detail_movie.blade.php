@@ -1,5 +1,5 @@
 @extends('template')
-@section('title', 'Login')
+@section('title', 'Detail Movie')
 @section('konten')
 <style>
     .carousel-control-prev,

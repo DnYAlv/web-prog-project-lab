@@ -1,5 +1,5 @@
 @extends('template')
-@section('title', 'Create Movie')
+@section('title', 'Edit Actor')
 @section('konten')
 
 <div class="container-fluid p-5">

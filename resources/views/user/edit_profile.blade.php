@@ -1,15 +1,6 @@
 @extends('template')
-@section('title', 'Login')
+@section('title', 'Profile')
 @section('konten')
-<div class="alert-danger">
-    @if ($errors->any())
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    @endif
-</div>
 <div class="container-fluid p-5">
     <div class="row">
         <div class="col-5 d-flex flex-column align-items-center text-center">
