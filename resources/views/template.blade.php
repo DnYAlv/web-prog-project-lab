@@ -41,7 +41,9 @@
                 </ul>
                 @auth
                     <div class="dropdown mx-2">
-                        <i class="bi bi-person-circle text-white" style="font-size: 1.5rem" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                        <div class="d-flex justify-content-center align-items-center" style="height: 40px; width: 40px" data-bs-toggle="dropdown" role="button">
+                            <img src="{{ Auth::user()->image }}" alt="" class="img-fluid" style="width: 50px; height: 50px;">
+                        </div>
                         <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
                             <li><a class="dropdown-item" href="/profile">Profile</a></li>
                             <li><hr class="dropdown-divider"></li>
