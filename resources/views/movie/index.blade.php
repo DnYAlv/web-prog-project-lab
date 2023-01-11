@@ -138,31 +138,13 @@
     </div>
 </div>
 <hr>
-<div id="genre" class="carousel slide m-5" data-bs-interval="true">
-    <div class="carousel-inner">
-        @php
-            $countGenres = $genres->count();
-            // $carouselCount = $countGenres / 6;
-        @endphp
-        @for ($i = 0; $i < $countGenres; $i++)
-            <div class="carousel-item {{ $i == 0 ? 'active' : '' }}">
-                <div class="row">
-                    @php
-                        // $start = $i * 6;
-                        // $end = $start + 6;
-                        $subset = $genres->slice(0, $countGenres);
-                    @endphp
-                    @foreach ($subset as $genre)
-                        <div class="col">
-                            <button type="button" class="btn btn-secondary rounded-pill w-75">
-                                {{ $genre->genre_name }}
-                            </button>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        @endfor
-    </div>
+
+<div class="d-flex flex-wrap gap-3 m-4">
+    @foreach ($genres as $genre)
+        <button type="button" class="btn btn-secondary rounded-pill">
+            {{ $genre->genre_name }}
+        </button>
+    @endforeach
 </div>
 <div class="row w-25 m-3">
     <div class="col-3 m-0">

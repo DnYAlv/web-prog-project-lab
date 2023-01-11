@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -66,12 +67,13 @@ class UserController extends Controller
     }
 
     public function update(Request $request){
+
         $rules = [
-            'name' => 'required|min:5|unique:users,name',
-            'email' => 'required|email|unique:users,email',
+            'name' => 'required|min:5',
+            'email' => 'required|email',
             'date_of_birth' => 'required|date',
             'phone' => 'required|min:5|max:13',
-            'image' => 'string'
+            'image' => 'nullable|string'
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -79,13 +81,19 @@ class UserController extends Controller
         if($validator->fails()){
             return back()->withErrors($validator);
         }
-
-        $data = $request->all();
+        // dd($request->all());
+        $data = $request->only(['name','email','date_of_birth','phone']);
         $user = User::find(Auth::id());
-        $user->update($data);
 
+        if ($request->image) {
+            $data['image'] = $request->image;
+        }
+        // dd($data);
+        $user->update($data);
+        // dd($user);
         return redirect('/profile');
     }
+
 
     public function logoutUser(Request $request) {
         Auth::logout();

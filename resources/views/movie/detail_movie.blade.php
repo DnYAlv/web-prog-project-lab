@@ -1,6 +1,14 @@
 @extends('template')
 @section('title', 'Login')
 @section('konten')
+<style>
+    .carousel-control-prev,
+    .carousel-control-next {
+        position: absolute;
+        width: 30px;
+    }
+
+</style>
 <div class="card">
     <img src="{{Storage::url('images/background/' . $movie->background)}}" class="card-img opacity-2" alt="...">
     <div class="row card-img-overlay p-5">
@@ -88,7 +96,86 @@
     </div>
     @endforeach
 </div>
-<div class="row p-5">
+
+<div id="moreMovies" class="carousel slide py-5 p-5" data-bs-ride="true">
+    <h3><div class="vr me-2"></div>More</h3>
+    <div class="carousel-inner">
+        @php
+            $countMovies = $movies->count();
+            $carouselCount = $countMovies / 5;
+        @endphp
+        @for ($i = 0; $i < $carouselCount; $i++)
+            <div class="carousel-item {{ $i == 0 ? 'active' : '' }}">
+                <div class="row">
+                    @php
+                        $start = $i * 5;
+                        $end = 5;
+                        $subset = $movies->slice($start, $end);
+                    @endphp
+                    @foreach ($subset as $movie)
+                        <div class="col">
+                            <div class="card">
+                                <a href="/movies/detail/{{ $movie->id }}">
+                                    <img height="360px"
+                                        src="{{ Storage::url('images/thumbnail/' . $movie->image_thumbnail) }}"
+                                        class="card-img-top" alt="...">
+                                </a>
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ $movie->title }}</h5>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p class="card-text text-muted">{{ date('Y', strtotime($movie->release_date)) }}
+                                        </p>
+                                        @auth
+                                            @php
+                                                $alreadyAdded = false;
+                                            @endphp
+                                            @if (Auth::user()->role == 'user')
+                                                @foreach ($movie->users as $user)
+                                                    @if ($user->id == Auth::id())
+                                                        @php
+                                                            $alreadyAdded = true;
+                                                        @endphp
+                                                    @endif
+                                                @endforeach
+                                                @if ($alreadyAdded)
+                                                    <form action="/watchlist/delete/{{ $movie->id }}" method="post"
+                                                        enctype="multipart/form-data">
+                                                        @csrf
+                                                        <input type="hidden" id="id" name="movie_id" value="{{ $movie->id }}">
+                                                        <button class="btn btn-success mx-2 w-30" type="submit">
+                                                            <i class="bi-check-lg"></i>
+                                                        </button>
+                                                    </form>
+                                                @else
+                                                    <form action="/watchlist/create" method="post" enctype="multipart/form-data">
+                                                        @csrf
+                                                        <input type="hidden" id="id" name="movie_id" value="{{ $movie->id }}">
+                                                        <button class="btn btn-primary mx-2 w-30" type="submit">
+                                                            <i class="bi-plus-lg"></i>
+                                                        </button>
+                                                    </form>
+                                                @endif
+                                            @endif
+                                        @endauth
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        @endfor
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#moreMovies" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#moreMovies" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+{{-- <div class="row p-5">
     <h3><div class="vr me-2"></div>More</h3>
     @foreach ($movies as $m)
         <div class="col">
@@ -103,5 +190,5 @@
             </div>
         </div>
     @endforeach
-</div>
+</div> --}}
 @endsection

@@ -17,7 +17,21 @@ class WatchlistController extends Controller
             ->withWatchlistStatus($watchlist_status)
             ->withSearch($search)
             ->paginate(5);
-        return view('user.watchlist', ['watchlists' => $watchlists]);
+        return view('user.watchlist', ['watchlists' => $watchlists, 'status_enum' => ['Planned', 'Watching', 'Finished']]);
+    }
+
+    public function updateStatus(Request $request, $id){
+        if($request->selectedStatus == 'Remove'){
+            Watchlist::where('id', $id)->delete();
+            return back();
+        }
+
+        $watchlist = Watchlist::where('id', $id)->first();
+        $watchlist->update([
+            'watchlist_status' => $request->selectedStatus
+        ]);
+
+        return back();
     }
 
     public function store(Request $request){
@@ -26,12 +40,12 @@ class WatchlistController extends Controller
             'user_id' => Auth::id()
         ]);
 
-        return redirect()->back();
+        return back();
     }
 
     public function delete($id){
         Watchlist::where('movie_id', $id)->where('user_id', Auth::id())->delete();
 
-        return redirect()->back();
+        return back();
     }
 }

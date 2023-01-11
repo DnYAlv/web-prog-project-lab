@@ -100,7 +100,7 @@ class MovieController extends Controller
     public function movieDetail($id){
         $movie = Movie::where('id', $id)->first();
         //Need to show more movies, so added a variable to store all Movie data
-        $other = Movie::where('id', '!=', $id)->paginate(5);
+        $other = Movie::where('id', '!=', $id)->get();
 
         return view('movie.detail_movie', ['movie' => $movie, 'movies' => $other]);
     }
