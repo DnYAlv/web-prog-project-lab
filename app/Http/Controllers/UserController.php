@@ -66,12 +66,13 @@ class UserController extends Controller
     }
 
     public function update(Request $request){
+
         $rules = [
-            'name' => 'required|min:5|unique:users,name',
-            'email' => 'required|email|unique:users,email',
+            'name' => 'required|min:5',
+            'email' => 'required|email',
             'date_of_birth' => 'required|date',
             'phone' => 'required|min:5|max:13',
-            'image' => 'string'
+            'image' => 'nullable|string'
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -80,12 +81,18 @@ class UserController extends Controller
             return back()->withErrors($validator);
         }
 
-        $data = $request->all();
+        $data = $request->only(['name','email','date_of_birth','phone']);
         $user = User::find(Auth::id());
+
+        if ($request->image) {
+            $data['image'] = $request->image;
+        }
+
         $user->update($data);
 
         return redirect('/profile');
     }
+
 
     public function logoutUser(Request $request) {
         Auth::logout();

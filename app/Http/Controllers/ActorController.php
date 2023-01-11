@@ -9,8 +9,9 @@ use Illuminate\Support\Facades\Validator;
 
 class ActorController extends Controller
 {
-    public function index(){
-        $actors = Actor::all();
+    public function index(Request $request){
+        $search = $request->search;
+        $actors = Actor::where('name', 'like', "%{$search}%")->get();
 
         return view('actor.index', ['actors' => $actors]);
     }
@@ -102,7 +103,7 @@ class ActorController extends Controller
             return redirect('/actors/detail/'.$actor->id)->with('error', 'This Actor, '.$actor->name.' can\'t be deleted since this actor plays a movie');
         }
 
-        // Storage::delete('public/images/actor/'.$actor->image_url);
+        Storage::delete('public/images/actor/'.$actor->image_url);
         Actor::where('id', $id)->delete();
 
         return redirect('/actors');

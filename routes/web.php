@@ -21,12 +21,13 @@ Route::group(['middleware' => ['auth']], function(){
     Route::group(['prefix' => 'watchlist'], function(){
         Route::get('/', [WatchlistController::class, 'index'])->name('watchlist');
         Route::post('/create', [WatchlistController::class, 'store']);
+        Route::put('/update/{id}', [WatchlistController::class, 'updateStatus']);
         Route::post('/delete/{id}', [WatchlistController::class, 'delete']);
     });
 
     Route::group(['prefix' => 'profile'], function(){
         Route::get('/', [UserController::class, 'editProfile']);
-        Route::post('/update', [UserController::class, 'update']);
+        Route::put('/update', [UserController::class, 'update']);
     });
 });
 
@@ -47,7 +48,7 @@ Route::group(['middleware' => ['guest']], function(){
 
 // Movie
 Route::group(['prefix' => 'movies'], function () {
-    Route::get('/', [MovieController::class, 'index']);
+    Route::get('/', [MovieController::class, 'index'])->name('movies');
     Route::get('/detail/{id}', [MovieController::class, 'movieDetail']);
 
     // Ini cek kalo admin baru bisa access ini

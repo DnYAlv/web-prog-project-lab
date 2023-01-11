@@ -8,7 +8,7 @@
         <div class="col-4 row">
             <div class="col">
                 <form role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" value="{{ request('search') }}">
                 </form>
             </div>
             @auth

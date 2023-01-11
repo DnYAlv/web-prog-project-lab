@@ -1,11 +1,14 @@
 @extends('template')
-@section('title', 'Login')
+@section('title', 'Profile')
 @section('konten')
 <div class="container-fluid p-5">
     <div class="row">
-        <div class="col-5 text-center">
+        <div class="col-5 d-flex flex-column align-items-center text-center">
             <h3>My <span class="text-danger">Profile</span></h3>
-            <button class="bi bi-person-circle text-white" style="font-size: 8rem; background: none; border: none;" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
+            <div class="d-flex justify-content-center align-items-center" style="height: 194px; width: 140px" data-bs-toggle="modal" data-bs-target="#exampleModal" role="button">
+                <img src="{{ $user->image }}" alt="" class="img-fluid" style="width: 128px; height: 128px;">
+            </div>
+
             <p>{{$user->name}}</p>
             <p class="text-muted">{{$user->email}}</p>
             <!-- Modal -->
@@ -17,12 +20,12 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <input type="text" class="form-control" id="image_profile" name="image_profile" placeholder="Image URL">
+                        <input type="text" class="form-control" id="image_profile" name="image" placeholder="Image URL" form="updateProfileForm">
                         <p class="text-muted">Please upload your image to other sources first and Use the URL</p>
                     </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger">Save changes</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Save changes</button>
                     </div>
                 </div>
                 </div>
@@ -30,14 +33,15 @@
         </div>
         <div class="col">
             <h3 class="text-danger p-2">Update Profile</h3>
-            <form class="p-2" enctype="multipart/form-data" action="#" method="post">
+            <form class="p-2" id="updateProfileForm" enctype="multipart/form-data" action="/profile/update" method="post">
                 @csrf
+                @method('PUT')
                 <div class="input-group mb-3">
                     <span class="input-group-text w-25">Username</span>
-                    <input type="text" name="username" id="username" class="form-control" value="{{$user->name}}">
+                    <input type="text" name="name" id="username" class="form-control" value="{{$user->name}}">
                 </div>
-                @if ($errors->get('username'))
-                    <strong> {{ $errors->first('username') }} </strong>
+                @if ($errors->get('name'))
+                    <strong> {{ $errors->first('name') }} </strong>
                 @endif
                 <div class="input-group mb-3">
                     <span class="input-group-text w-25">Email</span>

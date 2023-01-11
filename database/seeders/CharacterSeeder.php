@@ -65,6 +65,11 @@ class CharacterSeeder extends Seeder
                 'movie_id' => 6,
                 'character_name' => 'Deckard Shaw'
             ],
+            [
+                'actor_id' => 9,
+                'movie_id' => 1,
+                'character_name' => 'America Chavez'
+            ],
         ]);
     }
 }

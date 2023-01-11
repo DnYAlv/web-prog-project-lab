@@ -16,7 +16,7 @@
         <div class="input-group mb-3 w-25">
             <span class="input-group-text"><i class="bi bi-funnel-fill"></i></span>
             <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropdownMenuButton">
-                All
+                {{ request('watchlist_status', 'All') }}
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <li><a class="dropdown-item" href="{{route('watchlist', ['watchlist_status' => 'All'])}}">All</a></li>
@@ -50,7 +50,33 @@
                         @endif
 
                         <td>
-                            <i class="bi bi-three-dots"></i>
+                            <i class="bi bi-three-dots" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $wl->id }}"></i>
+                            <div class="modal" id="exampleModal{{ $wl->id }}" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content bg-dark">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Update Image</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="/watchlist/update/{{ $wl->id }}" method="post" id="statusForm{{ $wl->id }}">
+                                                @csrf
+                                                @method('PUT')
+                                                <select class="form-select" aria-label="Default select example" name="selectedStatus">
+                                                    @foreach ($status_enum as $status)
+                                                        <option value="{{ $status }}" @if ($status == $wl->watchlist_status) selected @endif>{{ $status }}</option>
+                                                    @endforeach
+                                                    <option value="Remove">Remove</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-danger" form="statusForm{{ $wl->id }}">Save changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 @endforeach
@@ -62,20 +88,4 @@
             {{ $watchlists->links()}}
         </div>
     </div>
-    <script>
-        $('.dropdown-menu a').click(function(event) {
-            event.preventDefault();
-            var buttonText = $(this).text();
-            localStorage.setItem("buttonText", buttonText);
-            location.href = $(this).attr('href');
-        });
-
-        $(document).ready(function() {
-            var buttonText = localStorage.getItem("buttonText");
-            if (buttonText) {
-                $('#dropdownMenuButton').text(buttonText);
-            }
-        });
-    </script>
-
 @endsection
