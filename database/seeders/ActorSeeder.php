@@ -86,6 +86,15 @@ class ActorSeeder extends Seeder
                 'place_of_birth' => 'United Kingdom (UK)',
                 'image_url' => 'jason-statham.jpg',
                 'popularity' => 95
+            ],
+            [
+                'name' => 'Xochitl Gomez',
+                'gender' => 'Female',
+                'biography' => 'Xochitl Gomez is an American actress. She is known for playing America Chavez in the Marvel Cinematic Universe film Doctor Strange in the Multiverse of Madness. She has also played Dawn Schafer in the first season of the Netflix series The Baby-Sitters.',
+                'date_of_birth' => '2006-04-29',
+                'place_of_birth' => 'United States America (USA)',
+                'image_url' => 'xochitl-gomez.jpg',
+                'popularity' => 86
             ]
         ]);
     }

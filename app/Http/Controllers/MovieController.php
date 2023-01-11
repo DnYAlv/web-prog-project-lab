@@ -10,17 +10,32 @@ use App\Models\Movie;
 use App\Models\Watchlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class MovieController extends Controller
 {
-    public function index(){
-        $movies = Movie::all();
+    public function index(Request $request){
+        $search = $request->query('search', '');
+        $sortBy = $request->query('sortBy', '');
+        $genreChosen = $request->query('genreChosen', '');
         $genres = Genre::all();
+        $moviesAll = Movie::all();
 
-        return view('movie.index', ['movies' => $movies, 'genres' => $genres]);
+        $movies = Movie::withSearch($search)
+            ->withSortBy($sortBy)
+            ->withGenre($genreChosen)
+            ->get();
+
+        $allMovies = Movie::all();
+        foreach($allMovies as $movie){
+            $movie['count_watchlist'] = Watchlist::where('movie_id', $movie->id)->count();
+        }
+
+        $sortedAllMovies = collect($allMovies);
+        $sortedAllMovies = $sortedAllMovies->sortByDesc('count_watchlist')->values();
+
+        return view('movie.index', ['movies' => $movies, 'allMovies' => $moviesAll, 'genres' => $genres, 'sortedAllMovies' => $sortedAllMovies]);
     }
 
     public function create()

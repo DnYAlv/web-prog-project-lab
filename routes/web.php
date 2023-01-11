@@ -48,7 +48,7 @@ Route::group(['middleware' => ['guest']], function(){
 
 // Movie
 Route::group(['prefix' => 'movies'], function () {
-    Route::get('/', [MovieController::class, 'index']);
+    Route::get('/', [MovieController::class, 'index'])->name('movies');
     Route::get('/detail/{id}', [MovieController::class, 'movieDetail']);
 
     // Ini cek kalo admin baru bisa access ini

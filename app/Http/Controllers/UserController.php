@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use App\Models\User;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -81,16 +80,16 @@ class UserController extends Controller
         if($validator->fails()){
             return back()->withErrors($validator);
         }
-        // dd($request->all());
+
         $data = $request->only(['name','email','date_of_birth','phone']);
         $user = User::find(Auth::id());
 
         if ($request->image) {
             $data['image'] = $request->image;
         }
-        // dd($data);
+
         $user->update($data);
-        // dd($user);
+
         return redirect('/profile');
     }
 

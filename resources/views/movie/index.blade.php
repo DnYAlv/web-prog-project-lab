@@ -19,7 +19,7 @@
         </div>
         <div class="carousel-inner">
             @php
-                $shuffledMovies = $movies->shuffle();
+                $shuffledMovies = $allMovies->shuffle();
                 $randomMovies = $shuffledMovies->take(3);
             @endphp
             @foreach ($randomMovies as $i => $movie)
@@ -88,7 +88,7 @@
     <div id="popular" class="carousel slide my-5" data-bs-ride="true">
         <div class="carousel-inner">
             @php
-                $countMovies = $movies->count();
+                $countMovies = $sortedAllMovies->count();
                 $carouselCount = $countMovies / 5;
             @endphp
             @for ($i = 0 ; $i < $carouselCount ; $i++)
@@ -97,7 +97,7 @@
                         @php
                             $start = $i * 5;
                             $end = 5;
-                            $subset = $movies->slice($start, $end);
+                            $subset = $sortedAllMovies->slice($start, $end);
                         @endphp
                         @foreach ($subset as $movie)
                             <div class="col">
@@ -133,7 +133,7 @@
     </div>
     <div class="col-3">
         <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <input class="form-control me-2" type="search" placeholder="Search" name='search' aria-label="Search" value="{{request('search')}}">
         </form>
     </div>
 </div>
@@ -141,9 +141,11 @@
 
 <div class="d-flex flex-wrap gap-3 m-4">
     @foreach ($genres as $genre)
-        <button type="button" class="btn btn-secondary rounded-pill">
-            {{ $genre->genre_name }}
-        </button>
+        <a href="{{route('movies', ['genreChosen' => $genre->genre_name ])}}">
+            <button type="button" class="btn btn-secondary rounded-pill">
+                {{ $genre->genre_name }}
+            </button>
+        </a>
     @endforeach
 </div>
 <div class="row w-25 m-3">
@@ -151,19 +153,25 @@
         <h5 class="my-1">Sort By:</h5>
     </div>
     <div class="col">
-        <button type="button" class="btn btn-secondary rounded-pill w-100">
-            Latest
-        </button>
+        <a href="{{route('movies', ['sortBy' => 'Latest'])}}">
+            <button type="button" class="btn btn-secondary rounded-pill w-100">
+                Latest
+            </button>
+        </a>
     </div>
     <div class="col">
-        <button type="button" class="btn btn-secondary rounded-pill w-100">
-            A-Z
-        </button>
+        <a href="{{route('movies', ['sortBy' => 'Ascending'])}}">
+            <button type="button" class="btn btn-secondary rounded-pill w-100">
+                A-Z
+            </button>
+        </a>
     </div>
     <div class="col">
-        <button type="button" class="btn btn-secondary rounded-pill w-100">
-            Z-A
-        </button>
+        <a href="{{route('movies', ['sortBy' => 'Descending'])}}">
+            <button type="button" class="btn btn-secondary rounded-pill w-100">
+                Z-A
+            </button>
+        </a>
     </div>
 </div>
 
